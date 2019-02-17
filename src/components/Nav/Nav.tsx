@@ -1,17 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import LinkArray from '../../Functional/linkArray';
+import LinkArray from '../../DupComp/linkArray';
+import { FaceLink } from '../../Type/Interface';
 
-interface InterfaceLink {
-    readonly to: string,
-    readonly text: string,
-    readonly download?: string,
-    readonly rel?: string,
-    readonly target?: string,
-    readonly type?: string,
-    readonly key?:number, 
- }
- 
+
+
+
 
 const Nav = (): JSX.Element => {
     return (
@@ -20,7 +14,6 @@ const Nav = (): JSX.Element => {
                 <ul >
                     <LinkArray array = {NavLink}/>
                 </ul>
-
 
                 <Switch>
                     <Route exact path="/" />
@@ -35,7 +28,7 @@ const Nav = (): JSX.Element => {
 }
 
 
-const NavLink: InterfaceLink[] = [
+const NavLink: FaceLink[] = [
     {
         to: '/Women',
         text: 'Women',

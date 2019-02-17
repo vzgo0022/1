@@ -1,4 +1,4 @@
-export interface InterfaceLink {
+export interface FaceLink {
     readonly to: string,
     readonly text: string,
     readonly download?: string,
