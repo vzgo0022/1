@@ -1,10 +1,12 @@
-import { createStore } from 'redux';
+import { createStore} from 'redux';
+import rootReducer from '../Reducers';
+
 
 
 
 const configureStore = preloadedState => (
   createStore(
-   
+    rootReducer,
     preloadedState,
   )
 );

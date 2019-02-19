@@ -1,38 +1,29 @@
-import * as React from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import LinkArray from '../../DupComp/linkArray';
-import { FaceLink } from '../../Type/Interface';
+import React, { FC } from 'react';
+import { Route, Switch } from 'react-router-dom';
+
+import DupLink from '../../DupComp/DupLink';
+import { NavArray } from './NavArray';
 
 
 
-
-
-const Nav = (): JSX.Element => {
+const NavReact: FC<{}> = () => {
     return (
-        <Router>
-            <nav >
-                <ul >
-                    <LinkArray array = {NavLink}/>
-                </ul>
+        <nav >
+            <ul >
+                <DupLink array={NavArray} />
+            </ul>
 
-                <Switch>
-                    <Route exact path="/" />
-                    <Route path="/Women" />
-                    <Route path="/Man" />
-                    <Route path="/Children" />
-                    <Route path="/Electronics" />
-                </Switch>
-            </nav>
-        </Router>
+            <Switch>
+                <Route exact path="/" />
+                <Route path="/Women" />
+                <Route path="/Man" />
+                <Route path="/Children" />
+                <Route path="/Electronics" />
+            </Switch>
+        </nav>
     )
 }
 
 
-const NavLink: FaceLink[] = [
-    {
-        to: '/Women',
-        text: 'Women',
-    }
-]
 
-
+export default NavReact;
