@@ -15,8 +15,7 @@ const DupLink: React.FC<{ array: faceLink[] }> = ({ array }) => (
          <Link
             to={to}
             key={id}
-            replace={replace}
-         >{text}</Link>)
+            replace={replace}>{text}</Link>)
    )}</Fragment>)
 
 
