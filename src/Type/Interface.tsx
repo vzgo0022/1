@@ -1,13 +1,8 @@
-export interface faceNavLink {
-    readonly to: string | object,
-    readonly id: string,
-    readonly replace?: object | boolean,
-    readonly text?: string,
-    readonly activeClassName?: string,
-    readonly activeStyle?: object,
-    readonly exact?: boolean,
-    readonly strict?: boolean,
-    readonly isActive?: (match?: object, location?: object) => boolean,
+import { NavLinkProps } from 'react-router-dom';
+
+export  interface faceNavLink extends NavLinkProps {
+  readonly id: string;
+  readonly text?: string,
 }
 
 export interface faceLink {

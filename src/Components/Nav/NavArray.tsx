@@ -4,23 +4,23 @@ import shortid from 'shortid';
 
 export const NavArray: faceLink[] = [
     {
-        to: '/Women',
-        text: 'Women',
+        to: '/1',
+        text: '1',
         id:shortid.generate()
     },
     {
-        to: '/Women',
-        text: 'Women',
+        to: '/2',
+        text: '2',
         id:shortid.generate()
     },
     {
-        to: '/Women',
-        text: 'Women',
+        to: '/3',
+        text: '3',
         id:shortid.generate()
     },
     {
-        to: '/Women',
-        text: 'Women',
+        to: '/4',
+        text: '4',
         id:shortid.generate()
     },
 

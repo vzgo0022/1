@@ -9,14 +9,14 @@ const DupLink: React.FC<{ array: faceLink[] }> = ({ array }) => (
    <Fragment>{array.map(({
       to,
       id,
-      replace = false,
-      text = ''
+      replace,
+      text 
    }: faceLink) => (
          <Link
             to={to}
             key={id}
             replace={replace}
-         > {text} </Link>)
+         >{text}</Link>)
    )}</Fragment>)
 
 

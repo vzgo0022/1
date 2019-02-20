@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import DupLink from '../../DupComp/DupLink';
+import DupNavLink from '../../DupComp/DupNavLink';
 import { NavArray } from './NavArray';
 
 
@@ -10,7 +10,7 @@ const NavReact: FC<{}> = () => {
     return (
         <nav >
             <ul >
-                <DupLink array={NavArray} />
+                <DupNavLink array={NavArray} />
             </ul>
 
             <Switch>

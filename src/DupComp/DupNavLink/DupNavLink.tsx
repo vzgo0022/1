@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { faceNavLink } from '../../Type/Interface';
-import shortid from 'shortid'
+
 
 
 
