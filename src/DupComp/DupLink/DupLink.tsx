@@ -1,21 +1,23 @@
-import React, { Fragment } from 'react';
+import React, { FC, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import { faceLink } from '../../Type/Interface';
 
 
 
-const DupLink: React.FC<{ array: faceLink[] }> = ({ array }) => (
+const DupLink: FC<{ array: faceLink[] }> = ({ array }) => (
    <Fragment>{array.map(({
       to,
       id,
       replace,
-      text 
+      text
    }: faceLink) => (
-         <Link
-            to={to}
-            key={id}
-            replace={replace}>{text}</Link>)
+         <li key={id}>
+            <Link
+               to={to}
+               key={id}
+               replace={replace}>{text}</Link>
+         </li>)
    )}</Fragment>)
 
 

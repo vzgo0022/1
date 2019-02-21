@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { FC, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { faceNavLink } from '../../Type/Interface';
@@ -6,7 +6,7 @@ import { faceNavLink } from '../../Type/Interface';
 
 
 
-const DupNavLink: React.FC<{ array: faceNavLink[] }> = ({ array }) => (
+const DupNavLink: FC<{ array: faceNavLink[] }> = ({ array }) => (
    <Fragment>{array.map(({
       to,
       id,
@@ -18,15 +18,17 @@ const DupNavLink: React.FC<{ array: faceNavLink[] }> = ({ array }) => (
       isActive,
       text
    }: faceNavLink) => (
-         <NavLink
-            key={id}
-            to={to}
-            replace={replace}
-            activeClassName={activeClassName}
-            activeStyle={activeStyle}
-            exact={exact}
-            strict={strict}
-            isActive={isActive} > {text} </NavLink>)
+         <li key={id}>
+            <NavLink
+               key={id}
+               to={to}
+               replace={replace}
+               activeClassName={activeClassName}
+               activeStyle={activeStyle}
+               exact={exact}
+               strict={strict}
+               isActive={isActive} > {text} </NavLink>
+         </li>)
    )}</Fragment>)
 
 

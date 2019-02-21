@@ -1,6 +1,6 @@
 import { faceNavLink, faceRoute } from '../../Type/Interface';
 import shortid from 'shortid';
-import {A,B,C,D} from '../Porc/Porc'
+import {A,B,C,D} from '../Porc/Porc';
 
 export const NavLink: faceNavLink[] = [
     {
