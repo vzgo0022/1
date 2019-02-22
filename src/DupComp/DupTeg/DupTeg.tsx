@@ -4,8 +4,10 @@ import { Attribut } from '../../Type/Interface';
 
 const DupTeg: FC<{ array: Attribut[] }> = ({ array }) => (
     <Fragment>
-        {array.map(({ teg, text, key, ...attribut }: Attribut) => (
-            <div key={key} {...attribut}>{text}</div>
+        {array.map(({ Tag, text, key, ...attribut }: Attribut) => (
+            <Fragment key={key}>
+                <Tag  {...attribut}>{text}</Tag>
+            </Fragment>
         ))}
     </Fragment>
 );

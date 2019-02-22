@@ -7,13 +7,10 @@ import { NavLink, NavRoute } from './NavArray';
 
 
 
-const NavReact:FC = () => {
+const NavReact: FC = () => {
     return (
         <nav >
-            <ul >
-                <DupNavLink array={NavLink} />
-            </ul>
-
+            <DupNavLink array={NavLink} />
             <Switch>
                 <DupRoute array={NavRoute} />
             </Switch>

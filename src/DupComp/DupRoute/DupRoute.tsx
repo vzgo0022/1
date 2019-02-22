@@ -16,16 +16,17 @@ const DupRoute: FC<{ array: faceRoute[] }> = ({ array }) => (
         location,
         sensitive
     }: faceRoute) => (
-            <Route
-                key={key}
-                component={component}
-                render={render}
-                children={children}
-                path={path}
-                exact={exact}
-                strict={strict}
-                location={location}
-                sensitive={sensitive} />)
+            <Fragment key={key}>
+                <Route
+                    component={component}
+                    render={render}
+                    children={children}
+                    path={path}
+                    exact={exact}
+                    strict={strict}
+                    location={location}
+                    sensitive={sensitive} />
+            </Fragment>)
     )}</Fragment>)
 
 

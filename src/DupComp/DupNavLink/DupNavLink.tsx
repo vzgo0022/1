@@ -18,9 +18,8 @@ const DupNavLink: FC<{ array: faceNavLink[] }> = ({ array }) => (
       isActive,
       text
    }: faceNavLink) => (
-         <li key={key}>
+         <Fragment key={key}>
             <NavLink
-               key={key}
                to={to}
                replace={replace}
                activeClassName={activeClassName}
@@ -28,7 +27,7 @@ const DupNavLink: FC<{ array: faceNavLink[] }> = ({ array }) => (
                exact={exact}
                strict={strict}
                isActive={isActive} > {text} </NavLink>
-         </li>)
+         </Fragment>)
    )}</Fragment>)
 
 

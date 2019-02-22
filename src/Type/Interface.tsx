@@ -30,7 +30,7 @@ export interface Product {
 //Teg
 
 export interface Attribut extends React.HTMLAttributes<HTMLElement> {
-  teg: string;
+  Tag: string;
   key: string;
   text?: string;
 }

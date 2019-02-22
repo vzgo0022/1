@@ -1,9 +1,10 @@
 import React, {FC, Fragment } from 'react';
-import Nav from './Components/Nav'
+import ListProduct from './Components/ListProduct/ListProduct';
+
 
 const App:FC = () => (
   <Fragment>
-    <Nav/>
+    <ListProduct/>
   </Fragment>
 )
 
