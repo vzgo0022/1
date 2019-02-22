@@ -6,7 +6,7 @@ import DupRoute from '../../DupComp/DupRoute';
 import { NavLink, NavRoute } from './CategoryListArray'
 
 
-const CategoryList: FC<({})> = () => {
+const CategoryList:FC = () => {
     return (
         <Fragment>
             <ul><DupNavLink array={NavLink} /></ul>

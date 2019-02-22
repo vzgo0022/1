@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
+import React, {FC, Fragment } from 'react';
 import Nav from './Components/Nav'
 
-const App = () => (
+const App:FC = () => (
   <Fragment>
     <Nav/>
   </Fragment>

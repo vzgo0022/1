@@ -10,14 +10,14 @@ const DupRoute: FC<{ array: faceRoute[] }> = ({ array }) => (
         render,
         children,
         path,
-        id,
+        key,
         exact,
         strict,
         location,
         sensitive
     }: faceRoute) => (
             <Route
-                key={id}
+                key={key}
                 component={component}
                 render={render}
                 children={children}

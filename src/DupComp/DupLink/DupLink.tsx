@@ -8,14 +8,14 @@ import { faceLink } from '../../Type/Interface';
 const DupLink: FC<{ array: faceLink[] }> = ({ array }) => (
    <Fragment>{array.map(({
       to,
-      id,
+      key,
       replace,
       text
    }: faceLink) => (
-         <li key={id}>
+         <li key={key}>
             <Link
                to={to}
-               key={id}
+               key={key}
                replace={replace}>{text}</Link>
          </li>)
    )}</Fragment>)

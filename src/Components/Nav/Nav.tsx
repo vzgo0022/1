@@ -7,7 +7,7 @@ import { NavLink, NavRoute } from './NavArray';
 
 
 
-const NavReact: FC<{}> = () => {
+const NavReact:FC = () => {
     return (
         <nav >
             <ul >

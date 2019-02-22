@@ -9,7 +9,7 @@ import { faceNavLink } from '../../Type/Interface';
 const DupNavLink: FC<{ array: faceNavLink[] }> = ({ array }) => (
    <Fragment>{array.map(({
       to,
-      id,
+      key,
       replace,
       activeClassName,
       activeStyle,
@@ -18,9 +18,9 @@ const DupNavLink: FC<{ array: faceNavLink[] }> = ({ array }) => (
       isActive,
       text
    }: faceNavLink) => (
-         <li key={id}>
+         <li key={key}>
             <NavLink
-               key={id}
+               key={key}
                to={to}
                replace={replace}
                activeClassName={activeClassName}
