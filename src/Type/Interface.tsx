@@ -26,10 +26,12 @@ export interface faceProduct {
   readonly shipping: string,
   readonly sold: string,
 }
+
 export interface faceProductList extends faceProduct{
   readonly id: string,
   readonly to: string,
 }
+
 //Teg
 
 export interface faceAttribut extends React.HTMLAttributes<HTMLElement> {

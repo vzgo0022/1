@@ -9,7 +9,7 @@ import { NavLink, NavRoute } from './CategoryListArray'
 const CategoryList:FC = () => {
     return (
         <Fragment>
-            <ul><DupNavLink array={NavLink} /></ul>
+            <DupNavLink array={NavLink} />
             <Switch>
                 <DupRoute array={NavRoute} />
             </Switch>
