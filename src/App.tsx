@@ -4,7 +4,7 @@ import ListProduct from './Components/ListProduct/ListProduct';
 
 const App:FC = () => (
   <Fragment>
-    <ListProduct/>
+    
   </Fragment>
 )
 

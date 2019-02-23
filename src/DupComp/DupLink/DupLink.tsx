@@ -12,7 +12,7 @@ const DupLink: FC<{ array: faceLink[] }> = ({ array }) => (
       replace,
       text
    }: faceLink) => (
-         <Fragment key={key}>
+         <Fragment key={`${key}+${to}+${text}`}>
             <Link
                to={to}
                replace={replace}>{text}</Link>

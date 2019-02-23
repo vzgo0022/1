@@ -18,7 +18,7 @@ const DupNavLink: FC<{ array: faceNavLink[] }> = ({ array }) => (
       isActive,
       text
    }: faceNavLink) => (
-         <Fragment key={key}>
+         <Fragment key={`${key}+${to}+${text}`}>
             <NavLink
                to={to}
                replace={replace}

@@ -16,7 +16,7 @@ const DupRoute: FC<{ array: faceRoute[] }> = ({ array }) => (
         location,
         sensitive
     }: faceRoute) => (
-            <Fragment key={key}>
+            <Fragment key={`${key}+${path}`}>
                 <Route
                     component={component}
                     render={render}

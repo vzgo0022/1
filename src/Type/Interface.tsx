@@ -19,17 +19,20 @@ export interface faceRoute extends RouteProps {
 
 //Product
 
-export interface Product {
+export interface faceProduct {
   readonly title: string,
   readonly price: string,
-  readonly proState: string,
+  readonly prodState: string,
   readonly shipping: string,
   readonly sold: string,
 }
-
+export interface faceProductList extends faceProduct{
+  readonly id: string,
+  readonly to: string,
+}
 //Teg
 
-export interface Attribut extends React.HTMLAttributes<HTMLElement> {
+export interface faceAttribut extends React.HTMLAttributes<HTMLElement> {
   Tag: string;
   key: string;
   text?: string;

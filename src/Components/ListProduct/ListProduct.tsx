@@ -1,39 +1,21 @@
 import React, { FC, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
-
-import { Product, Attribut } from '../../Type/Interface'
-import shortid from "shortid";
-import DupTeg from '../../DupComp/DupTeg';
-
-const arrayTeg: Attribut[] = [
-  {
-    Tag: "span",
-    text: "1",
-    key: shortid.generate(),
-    style: { textAlign: "center" }
-  },
-  {
-    Tag: "span",
-    text: "2",
-    key: shortid.generate(),
-    style: { textAlign: "center" }
-  },
-  {
-    Tag: "span",
-    text: "3",
-    key: shortid.generate(),
-    style: { textAlign: "center" }
-  }
-];
+import Product from '../Product';
+import { faceProductList } from '../../Type/Interface';
 
 
-
-const ListProduct:FC<{}> = ({}) => {
-    return (
-        <Fragment>
-         <DupTeg array={arrayTeg}/>
+const ListProduct: FC<{ array: faceProductList[] }> = ({ array }) => {
+  return (
+    <Fragment>
+      {array.map(({ to, id, ...value }: faceProductList) => (
+        <Fragment key={id}>
+          <NavLink to={to} >
+            <Product {...value} />
+          </NavLink>
         </Fragment>
-    );
+      ))}
+    </Fragment>
+  );
 }
 
 export default ListProduct;

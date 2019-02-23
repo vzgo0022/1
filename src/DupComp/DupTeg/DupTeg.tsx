@@ -1,11 +1,11 @@
 import React, { FC, Fragment } from 'react';
 
-import { Attribut } from '../../Type/Interface';
+import { faceAttribut } from '../../Type/Interface';
 
-const DupTeg: FC<{ array: Attribut[] }> = ({ array }) => (
+const DupTeg: FC<{ array: faceAttribut[] }> = ({ array }) => (
     <Fragment>
-        {array.map(({ Tag, text, key, ...attribut }: Attribut) => (
-            <Fragment key={key}>
+        {array.map(({ Tag, text, key, ...attribut }: faceAttribut) => (
+            <Fragment key={`${key}+${Tag}+${text}`}>
                 <Tag  {...attribut}>{text}</Tag>
             </Fragment>
         ))}

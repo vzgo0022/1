@@ -1,27 +1,26 @@
 import { faceNavLink, faceRoute } from '../../Type/Interface';
-import shortid from 'shortid';
 import {A,B,C,D} from '../Porc/Porc'
 
 export const NavLink: faceNavLink[] = [
     {
         to: '/',
         text: 'Foo',
-        key: shortid.generate()
+        key: 'navNavLink1'
     },
     {
         to: '/male',
         text: 'male',
-        key: shortid.generate()
+        key: 'navNavLink2'
     },
     {
         to: '/female',
         text: 'female',
-        key: shortid.generate()
+        key: 'navNavLink3'
     },
     {
         to: '/childish',
         text: 'childish',
-        key: shortid.generate()
+        key: 'navNavLink4'
     },
 
 ]
@@ -31,22 +30,22 @@ export const NavRoute: faceRoute[] = [
         path: '/',
         exact: true,
         component: A,
-        key: shortid.generate(),
+        key: 'navRoute1',
     },
     {
         path: '/male',
         component: B,
-        key: shortid.generate(),
+        key: 'navRoute2',
     },
     {
         path: '/female',
         component: C,
-        key: shortid.generate()
+        key: 'navRoute3'
     },
     {
         path: '/childish',
         component: D,
-        key: shortid.generate()
+        key: 'navRoute4'
     },
 
 ]
