@@ -3,10 +3,10 @@ import { Switch } from 'react-router-dom';
 
 import DupNavLink from '../../DupComp/DupNavLink';
 import DupRoute from '../../DupComp/DupRoute';
-import { NavLink, NavRoute } from './CategoryListArray'
+import { NavLink, NavRoute } from './ListCategoryArray'
 
 
-const CategoryList:FC = () => {
+const ListCategory:FC = () => {
     return (
         <Fragment>
             <DupNavLink array={NavLink} />
@@ -17,4 +17,4 @@ const CategoryList:FC = () => {
     );
 }
 
-export default CategoryList;
+export default ListCategory;

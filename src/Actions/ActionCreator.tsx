@@ -1,23 +1,7 @@
-import { ADD_TASK, REMOVE_TASK, COMPLETE_TASK, CHANGE_FILTER } from '../Constants/Constants';
+import { CHANGE_TEXT } from '../Constants/Constants';
 
-export const addTast = (id, text, isCompleted) => ({
-  type: ADD_TASK,
-  id,
+export const changeText = (text) => ({
+  type: CHANGE_TEXT,
   text,
-  isCompleted
 });
 
-export const removeTask = id => ({
-  type: REMOVE_TASK,
-  id
-});
-
-export const completeTask = id => ({
-  type: COMPLETE_TASK,
-  id
-});
-
-export const changeFilter = activeFilter => ({
-  type: CHANGE_FILTER,
-  activeFilter,
-})

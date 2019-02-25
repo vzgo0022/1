@@ -1,11 +1,11 @@
-import { CHANGE_FILTER } from '../Constants/Constants';
+import { CHANGE_TEXT } from '../Constants/Constants';
 
-const BASE_FILTER = 'all';
 
-const filter = (state = BASE_FILTER, { type, activeFilter }) => {
+
+const filter = (state = '', { type, text }) => {
   switch (type) {
-    case CHANGE_FILTER:
-      return activeFilter;
+    case CHANGE_TEXT:
+      return text;
     default:
       return state;
   }

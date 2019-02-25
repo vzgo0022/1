@@ -1,5 +1,5 @@
 import React, { FC, Fragment } from 'react';
-
+import { connect } from 'react-redux';
 import { faceAttribut } from '../../Type/Interface';
 
 const DupTeg: FC<{ array: faceAttribut[] }> = ({ array }) => (

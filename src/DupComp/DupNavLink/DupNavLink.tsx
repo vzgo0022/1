@@ -4,8 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { faceNavLink } from '../../Type/Interface';
 
 
-
-
 const DupNavLink: FC<{ array: faceNavLink[] }> = ({ array }) => (
    <Fragment>{array.map(({
       to,
