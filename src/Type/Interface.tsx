@@ -25,6 +25,8 @@ export interface faceProduct {
   readonly prodState: string,
   readonly shipping: string,
   readonly sold: string,
+  readonly src: string,
+  readonly alt: string
 }
 
 export interface faceProductList extends faceProduct{
