@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useContext, useState, useEffect } from 'react'
+import React, { FC, Fragment, useContext, useState } from 'react'
 
 import { server } from '../../index';
 import { faceProductList } from '../../Type/Interface';
@@ -7,19 +7,20 @@ import { faceProductList } from '../../Type/Interface';
 const SearchText: FC = () => {
    const serverObj = useContext(server);
    const [valueSearch, setSearch] = useState <string>('');
-   const [x, setx] = useState <string>('');
+   const [id, setId] = useState <string>('All');
    const [reqSearch, setReqSearch] = useState<faceProductList[] | string>('');
 
-   const forSearch = (event) => {
-      serverObj.handler(`.json`,'s')
+   const onSearch = (event) => {
+      serverObj.handler(id,valueSearch)
       .then(res => setReqSearch(res))
+     
       event.preventDefault();
      }
-
+    ///////////////////////////// console.log(reqSearch);
 
    return (
       <Fragment>
-         <form onSubmit={forSearch}>
+         <form onSubmit={onSearch}>
          <input type={'text'}
             size={50}
             maxLength={150}
@@ -31,11 +32,11 @@ const SearchText: FC = () => {
             onChange={({ target }) => setSearch(target.value)} />
          <input type={'submit'} value={'search'} />
 
-         <select value={x} onChange={(e)=>setx(e.target.value)}>
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
+         <select value={id} onChange={(e)=>setId(e.target.value)}>
+            <option value="All">All Categories</option>
+            <option value="Mens">Mens clothing</option>
+            <option value="Womens">Womens clothing</option>
+            <option value="Childrens">Childrens clothing</option>
           </select>
          </form>
       </Fragment>

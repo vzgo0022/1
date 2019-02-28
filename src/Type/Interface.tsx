@@ -40,3 +40,10 @@ export interface faceAttribut extends React.HTMLAttributes<HTMLElement> {
   key: string;
   text?: string;
 }
+
+//Server
+
+export interface faceServer{
+  readonly man: faceProductList[],
+  readonly woman: faceProductList[],
+}
