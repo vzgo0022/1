@@ -2,21 +2,23 @@ import React, { FC, Fragment, useContext, useState } from 'react'
 
 import { server } from '../../index';
 import { faceProductList } from '../../Type/Interface';
+import ListProduct from '../ListProduct';
 
 
 const SearchText: FC = () => {
    const serverObj = useContext(server);
    const [valueSearch, setSearch] = useState <string>('');
    const [id, setId] = useState <string>('All');
-   const [reqSearch, setReqSearch] = useState<faceProductList[] | string>('');
+   const [reqSearch, setReqSearch] = useState<faceProductList[]>([]);
 
    const onSearch = (event) => {
       serverObj.handler(id,valueSearch)
-      .then(res => setReqSearch(res))
+      .then(res => {
+         setReqSearch(res)
+      })
      
       event.preventDefault();
      }
-    ///////////////////////////// console.log(reqSearch);
 
    return (
       <Fragment>
@@ -39,6 +41,7 @@ const SearchText: FC = () => {
             <option value="Childrens">Childrens clothing</option>
           </select>
          </form>
+         {reqSearch?<ListProduct array={reqSearch}/>:<div>{'Item XX not found'}</div>}
       </Fragment>
    )
 
