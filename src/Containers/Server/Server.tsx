@@ -1,16 +1,20 @@
-import { faceServer, faceProductList } from './../../Type/Interface';
+import { faceProductList } from './../../Type/Interface';
 
+interface fecHandler {
+    array:faceProductList[],
+    id:string
+}
 
 class Server {
     private url: string = 'https://foo0022.firebaseio.com/';
 
-    public async request(id: string): Promise<faceServer | faceProductList[]> {
+    public async request(id: string): Promise<faceProductList[]> {
         const res = await fetch(`${this.url}${id}`);
-        const resArr: faceServer | faceProductList[] = await res.json();
+        const resArr:faceProductList[] = await res.json();
         return resArr;
     }
 
-    public async handler(id: string, valueSearch: string): Promise<faceProductList[]> {
+    public async handler(id: string, valueSearch: string): Promise<fecHandler> {
 
         switch (id) {
             case 'All':
@@ -31,13 +35,16 @@ class Server {
         }
         return (await this.request(id)
             .then((array) => {
-                if (valueSearch && Array.isArray(array)) {
-                    return array.filter(({ title }) => title.includes(valueSearch));
-                } else if (valueSearch) {
-                    return (Object.values(array).flat()
-                        .filter(({ title }) => title.includes(valueSearch)));
+                if (valueSearch) {
+                    return {
+                        array:array.filter(({ title }) => title.includes(valueSearch)),
+                        id:id
+                    };
                 } else {
-                    return (Object.values(array).flat());
+                    return {
+                        array:Object.values(array).flat(),
+                        id:id                      
+                    };
                 }
             }));
 

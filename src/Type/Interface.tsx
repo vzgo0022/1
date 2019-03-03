@@ -1,9 +1,17 @@
 import { NavLinkProps, LinkProps, RouteProps } from 'react-router-dom';
+import React, {  Dispatch, SetStateAction } from 'react'
+
+//React
+
+export interface facUseState <T>{
+  useValue:Dispatch<SetStateAction<T>>,
+  value:T,
+}
 
 //react-router-dom
 
 export interface faceNavLink extends NavLinkProps {
-  readonly key: string;
+  readonly key: string,
   readonly text?: string,
 }
 
@@ -35,15 +43,8 @@ export interface faceProductList extends faceProduct{
 
 //Teg
 
-export interface faceAttribut extends React.HTMLAttributes<HTMLElement> {
+export interface faceAttribut extends React.OptionHTMLAttributes<HTMLOptionElement> {
   Tag: string;
   key: string;
   text?: string;
-}
-
-//Server
-
-export interface faceServer{
-  readonly man: faceProductList[],
-  readonly woman: faceProductList[],
 }
