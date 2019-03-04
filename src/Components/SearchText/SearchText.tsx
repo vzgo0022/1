@@ -13,7 +13,7 @@ import { SearchTextOption } from './SearchTextArray';
    const [id, useSetId] = useState <string>('All');
    const [reqSearch, setReqSearch] = useState<faceProductList[]>([]);
    const [boolSearch, setBool] = useState <boolean>(false);
-   const [newValSear, setnewValSear] = useState <string>('');
+   const [exValSear, setExValSear] = useState <string>('');
 
    const onSearch = (event) => {
       serverObj.handler(id,valueSearch)
@@ -22,7 +22,7 @@ import { SearchTextOption } from './SearchTextArray';
          setReqSearch(array);
          setBool(true);
          }else{
-         setnewValSear(value)  
+         setExValSear(value)  
          setBool(false);
          }  
       } )
@@ -48,7 +48,7 @@ import { SearchTextOption } from './SearchTextArray';
           </select>
          </form>
          {boolSearch ? <ListProduct array={reqSearch}/>
-         :newValSear && <div>{`Named "${newValSear}" item not found`}</div>}
+         :exValSear && <div>{`Named "${exValSear}" item not found`}</div>}
       </Fragment>
    )
 
