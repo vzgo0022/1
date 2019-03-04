@@ -2,7 +2,7 @@ import { faceProductList } from './../../Type/Interface';
 
 interface fecHandler {
     array:faceProductList[],
-    id:string
+    value:string
 }
 
 class Server {
@@ -37,13 +37,13 @@ class Server {
             .then((array) => {
                 if (valueSearch) {
                     return {
-                        array:array.filter(({ title }) => title.includes(valueSearch)),
-                        id:id
+                        array:Object.values(array).flat().filter(({ title }) => title.includes(valueSearch)),
+                        value:valueSearch
                     };
                 } else {
                     return {
                         array:Object.values(array).flat(),
-                        id:id                      
+                        value:valueSearch                      
                     };
                 }
             }));

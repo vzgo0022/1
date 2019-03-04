@@ -7,25 +7,28 @@ import { faceProductList } from '../../Type/Interface';
 import { SearchTextOption } from './SearchTextArray';
 
 
-
-const SearchText: FC = () => {
+ const SearchText: FC = () => {
    const serverObj = useContext(server);
    const [valueSearch, setSearch] = useState <string>('');
    const [id, useSetId] = useState <string>('All');
    const [reqSearch, setReqSearch] = useState<faceProductList[]>([]);
    const [boolSearch, setBool] = useState <boolean>(false);
-   
-   const ID:string ='';
+   const [newValSear, setnewValSear] = useState <string>('');
+
    const onSearch = (event) => {
       serverObj.handler(id,valueSearch)
-      .then(({array,id}) =>{
+      .then(({array,value}) =>{
+         if(array.length){
          setReqSearch(array);
-         setBool((exState)=>!exState);
-        
+         setBool(true);
+         }else{
+         setnewValSear(value)  
+         setBool(false);
+         }  
       } )
       event.preventDefault();
      }
-    console.log(reqSearch,boolSearch);
+   
    return (
       <Fragment>
          <form onSubmit={onSearch}>
@@ -44,8 +47,8 @@ const SearchText: FC = () => {
               <DupTeg array={SearchTextOption}/>
           </select>
          </form>
-         {boolSearch && <ListProduct array={reqSearch}/>}
-         {boolSearch && <div>{`Named "${valueSearch}" item not found`}</div>}
+         {boolSearch ? <ListProduct array={reqSearch}/>
+         :newValSear && <div>{`Named "${newValSear}" item not found`}</div>}
       </Fragment>
    )
 
