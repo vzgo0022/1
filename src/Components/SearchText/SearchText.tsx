@@ -56,8 +56,8 @@ const SearchText: FC = () => {
 
         <select
           value={id}
-          onChange={e => {
-            useSetId(e.target.value);
+          onChange={({ target }) => {
+            useSetId(target.value);
           }}
         >
           <DupTeg array={SearchTextOption} />
