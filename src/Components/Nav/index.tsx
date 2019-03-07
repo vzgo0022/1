@@ -1,4 +1,3 @@
-import NavReact from './Nav';
-
+import NavReact from "./Nav";
 
 export default NavReact;

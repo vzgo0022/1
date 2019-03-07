@@ -1,4 +1,3 @@
-import DupRoute from './DupRoute';
-
+import DupRoute from "./DupRoute";
 
 export default DupRoute;

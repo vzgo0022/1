@@ -1,4 +1,3 @@
-import DupLink from './DupLink';
-
+import DupLink from "./DupLink";
 
 export default DupLink;

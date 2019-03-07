@@ -1,4 +1,3 @@
-import ListProduct from './ListProduct';
-
+import ListProduct from "./ListProduct";
 
 export default ListProduct;

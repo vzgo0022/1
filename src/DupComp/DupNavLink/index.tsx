@@ -1,4 +1,3 @@
-import DupNavLink from './DupNavLink';
-
+import DupNavLink from "./DupNavLink";
 
 export default DupNavLink;

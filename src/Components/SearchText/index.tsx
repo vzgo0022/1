@@ -1,3 +1,3 @@
-import SearchText from './SearchText';
+import SearchText from "./SearchText";
 
 export default SearchText;
