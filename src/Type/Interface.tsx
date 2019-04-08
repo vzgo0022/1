@@ -1,11 +1,16 @@
 import { NavLinkProps, LinkProps, RouteProps } from "react-router-dom";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, OptionHTMLAttributes } from "react";
 
 //React
 
 export interface facUseState<T> {
   useValue: Dispatch<SetStateAction<T>>;
   value: T;
+}
+export interface facUseArray<T> {
+  useValue: Dispatch<SetStateAction<T>>;
+  value: T;
+  array: faceTeg[];
 }
 
 //react-router-dom
@@ -41,10 +46,18 @@ export interface faceProductList extends faceProduct {
 }
 
 //Teg
+export interface HOE extends OptionHTMLAttributes<HTMLOptionElement>{}
 
-export interface faceAttribut
-  extends React.OptionHTMLAttributes<HTMLOptionElement> {
+export interface faceTeg extends HOE {
   Tag: string;
   key: string;
   text?: string;
+}
+
+//Server
+
+export interface fecHandler {
+  array: faceProductList[];
+  value: string;
+  error: string;
 }

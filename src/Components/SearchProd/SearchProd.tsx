@@ -1,13 +1,15 @@
 import React, { FC, Fragment, useContext, useState } from "react";
 
-import ListProduct from "../ListProduct";
-import DupTeg from "../../DupComp/DupTeg";
 import { server } from "../../index";
 import { faceProductList } from "../../Type/Interface";
-import { SearchTextOption } from "./SearchTextArray";
+import { SearchTextOption } from "./SearchProdArray";
 import Error from "../Error";
+import ConveyorProduct from "../ConveyorProduct/ConveyorProduct";
+import USETimput from "../../Containers/ustTake/USETimput";
+import USETselect from "../../Containers/ustTake/USETselect/USETselect";
 
-const SearchText: FC = () => {
+
+const SearchProd: FC = () => {
   const serverObj = useContext(server);
   const [valueSearch, setSearch] = useState<string>("");
   const [id, useSetId] = useState<string>("All");
@@ -18,7 +20,8 @@ const SearchText: FC = () => {
 
   const onSearch = event => {
     try {
-      serverObj.handler(id, valueSearch).then(({ array, value, error }) => {
+      serverObj.handler(id, valueSearch)
+      .then(({ array, value, error }) => {
         if (error !== "successfully") {
           setResError(error);
         } else if (array.length) {
@@ -32,39 +35,18 @@ const SearchText: FC = () => {
     } catch (error) {
       setResError(error.message);
     }
-
     event.preventDefault();
   };
 
   return (
     <Fragment>
       <form onSubmit={onSearch}>
-        <input
-          type={"text"}
-          size={50}
-          maxLength={150}
-          placeholder={"Search for anything"}
-          alt={"search"}
-          spellCheck={false}
-          autoComplete={"off"}
-          value={valueSearch}
-          onChange={({ target }) => {
-            setSearch(target.value);
-          }}
-        />
+        <USETimput value={valueSearch} useValue={setSearch} />
         <input type={"submit"} value={"search"} />
-
-        <select
-          value={id}
-          onChange={({ target }) => {
-            useSetId(target.value);
-          }}
-        >
-          <DupTeg array={SearchTextOption} />
-        </select>
+        <USETselect value={id} useValue={useSetId} array={SearchTextOption} />
       </form>
       {boolSearch ? (
-        <ListProduct array={reqSearch} />
+        <ConveyorProduct arrConvProd={reqSearch} />
       ) : (
         exValSear && <div>{`Named "${exValSear}" item not found`}</div>
       )}
@@ -73,4 +55,4 @@ const SearchText: FC = () => {
   );
 };
 
-export default SearchText;
+export default SearchProd;

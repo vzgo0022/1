@@ -1,6 +1,6 @@
-import { faceAttribut } from "./../../Type/Interface";
+import { faceTeg } from "./../../Type/Interface";
 
-export const SearchTextOption: faceAttribut[] = [
+export const SearchTextOption: faceTeg[] = [
   {
     Tag: "option",
     key: "vgoikdnidfs",

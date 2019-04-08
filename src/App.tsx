@@ -1,9 +1,9 @@
 import React, { FC, Fragment } from "react";
-import SearchText from "./Components/SearchText";
+import Nav from "./Components/Nav/Nav";
 
 const App: FC = () => (
   <Fragment>
-    <SearchText />
+    <Nav />
   </Fragment>
 );
 

@@ -1,7 +1,7 @@
 import React, { FC, Fragment } from "react";
 import { Route } from "react-router-dom";
 
-import { faceRoute } from "./../../Type/Interface";
+import { faceRoute } from "../../../Type/Interface";
 
 const DupRoute: FC<{ array: faceRoute[] }> = ({ array }) => (
   <Fragment>

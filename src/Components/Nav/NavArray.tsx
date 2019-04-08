@@ -1,5 +1,7 @@
 import { faceNavLink, faceRoute } from "../../Type/Interface";
-import { A, B, C, D } from "../Porc/Porc";
+import React, { Fragment } from 'react';
+
+import ButSearch from ".././ButSearch";
 
 export const NavLink: faceNavLink[] = [
   {
@@ -28,22 +30,22 @@ export const NavRoute: faceRoute[] = [
   {
     path: "/",
     exact: true,
-    component: A,
+    render: () => <Fragment><div>'ll'</div></Fragment> ,
     key: "navRoute1"
   },
   {
     path: "/male",
-    component: B,
+    render: () => <ButSearch reqName={"man"} />,
     key: "navRoute2"
   },
   {
     path: "/female",
-    component: C,
+    render: () => <ButSearch reqName={"woman"} />,
     key: "navRoute3"
   },
   {
     path: "/childish",
-    component: D,
+    render: () => <ButSearch reqName={"child"} />,
     key: "navRoute4"
   }
 ];

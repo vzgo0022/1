@@ -1,21 +1,19 @@
-import { faceProductList } from "./../../Type/Interface";
-
-interface fecHandler {
-  array: faceProductList[];
-  value: string;
-  error: string;
-}
+import { fecHandler } from "../../Type/Interface";
 
 class Server {
   private url: string = "https://foo0022.firebaseio.com/";
 
   public async request(id: string): Promise<object | string> {
-    const res = await fetch(`${this.url}${id}`);
-    if (!res.ok) {
-      throw Error("Page Not Found 404");
+    try {
+      const res = await fetch(`${this.url}${id}`);
+      if (!res.ok) {
+        throw Error("Page Not Found 404");
+      }
+      const resArr: object = await res.json();
+      return resArr;
+    } catch (error) {
+      return error.message;
     }
-    const resArr: object = await res.json();
-    return resArr;
   }
 
   public async handler(id: string, valueSearch: string): Promise<fecHandler> {
@@ -38,7 +36,9 @@ class Server {
     }
     return await this.request(id)
       .then(resArray => {
-        if (valueSearch) {
+        if (typeof resArray === "string") {
+          throw Error(resArray); 
+        } else if (valueSearch) {
           return {
             array: Object.values(resArray)
               .flat()

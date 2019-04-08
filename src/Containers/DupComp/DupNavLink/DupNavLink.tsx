@@ -1,7 +1,7 @@
 import React, { FC, Fragment } from "react";
 import { NavLink } from "react-router-dom";
 
-import { faceNavLink } from "../../Type/Interface";
+import { faceNavLink } from "../../../Type/Interface";
 
 const DupNavLink: FC<{ array: faceNavLink[] }> = ({ array }) => (
   <Fragment>
