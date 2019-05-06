@@ -1,16 +1,18 @@
-import React, { FC, Fragment } from "react";
+import React, { FC, Fragment, memo } from "react";
 import { NavLink } from "react-router-dom";
 
-import Product from "../Product";
+import SeaAnsProd from "../SeaAnsProd";
 import { faceProductList } from "../../Type/Interface";
 
-const ListProduct: FC<{ arrListProd: faceProductList[] }> = ({ arrListProd }) => {
+const ListProduct: FC<{ arrListProd: faceProductList[] }> = ({
+  arrListProd
+}) => {
   return (
     <Fragment>
       {arrListProd.map(({ to, id, ...value }: faceProductList) => (
         <Fragment key={id}>
-          <NavLink to={to}>
-            <Product {...value} />
+          <NavLink to={`${to}`}>
+            <SeaAnsProd {...value} />
           </NavLink>
         </Fragment>
       ))}
@@ -18,4 +20,4 @@ const ListProduct: FC<{ arrListProd: faceProductList[] }> = ({ arrListProd }) =>
   );
 };
 
-export default ListProduct;
+export default memo(ListProduct);

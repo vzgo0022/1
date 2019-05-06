@@ -1,6 +1,6 @@
-import { faceTeg } from "./../../Type/Interface";
+import { faceTegOption } from "./../../Type/Interface";
 
-export const SearchTextOption: faceTeg[] = [
+export const SearchTextOption: faceTegOption[] = [
   {
     Tag: "option",
     key: "vgoikdnidfs",
@@ -26,3 +26,4 @@ export const SearchTextOption: faceTeg[] = [
     value: "Childrens"
   }
 ];
+

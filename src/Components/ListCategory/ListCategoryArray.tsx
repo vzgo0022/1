@@ -8,7 +8,7 @@ export const NavLink: faceNavLink[] = [
     text: "Foo",
     key: shortid.generate()
   },
-  {
+  {////////////////// sxala
     to: "/male",
     text: "male",
     key: shortid.generate()

@@ -3,11 +3,11 @@ import React, { FC, Fragment, useContext, useState } from "react";
 import { server } from "../../index";
 import { faceProductList } from "../../Type/Interface";
 import { SearchTextOption } from "./SearchProdArray";
+import { inputSetSearch } from "./SarchProdObject";
 import Error from "../Error";
 import ConveyorProduct from "../ConveyorProduct/ConveyorProduct";
-import USETimput from "../../Containers/ustTake/USETimput";
-import USETselect from "../../Containers/ustTake/USETselect/USETselect";
-
+import {DupTegText} from "../../Containers/DupComp/DupTeg/DupTeg";
+import NotFound from "../NotFound";
 
 const SearchProd: FC = () => {
   const serverObj = useContext(server);
@@ -20,8 +20,7 @@ const SearchProd: FC = () => {
 
   const onSearch = event => {
     try {
-      serverObj.handler(id, valueSearch)
-      .then(({ array, value, error }) => {
+      serverObj.handler(id, valueSearch).then(({ array, value, error }) => {
         if (error !== "successfully") {
           setResError(error);
         } else if (array.length) {
@@ -41,14 +40,26 @@ const SearchProd: FC = () => {
   return (
     <Fragment>
       <form onSubmit={onSearch}>
-        <USETimput value={valueSearch} useValue={setSearch} />
+        <input
+          {...inputSetSearch}
+          onChange={({ target }) => {
+            setSearch(target.value);
+          }}
+        />
         <input type={"submit"} value={"search"} />
-        <USETselect value={id} useValue={useSetId} array={SearchTextOption} />
+        <select
+          value={id}
+          onChange={({ target: { value } }) => {
+            useSetId(value);
+          }}
+        >
+          <DupTegText array={SearchTextOption} />
+        </select>
       </form>
       {boolSearch ? (
         <ConveyorProduct arrConvProd={reqSearch} />
       ) : (
-        exValSear && <div>{`Named "${exValSear}" item not found`}</div>
+        exValSear && <NotFound prodName={exValSear} />
       )}
       {resError && <Error error={resError} />}
     </Fragment>

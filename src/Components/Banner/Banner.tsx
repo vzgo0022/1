@@ -1,16 +1,16 @@
 import React, { FC, Fragment, useState } from "react";
-import { faceProductList, HOE } from "../../Type/Interface";
+import { faceProductList, faceTeg } from "../../Type/Interface";
 
 const Banner: FC<{
   array: faceProductList[];
   yardage: number;
-  section: HOE[];
+  section: faceTeg[];
 }> = ({ array, yardage, section }) => {
   const [ListElem, setListElem] = useState<faceProductList[]>(
     array.slice(0, yardage)
   );
   const [index, setIndex] = useState<number>(yardage);
-  const [category, setCategory] = useState<HOE>(section[0]);
+  const [category, setCategory] = useState<faceTeg>(section[0]);
   const [cateIndex, setCateIndex] = useState<number>(0);
 
   const arryForth = () => {
@@ -26,7 +26,7 @@ const Banner: FC<{
       setCateIndex(index => index + 1);
     }
   };
-  const arrybeck = () => {
+  const arryBeck = () => {
     if (index === yardage) {
       setListElem(array.slice(array.length - yardage, array.length));
       setIndex(array.length);
@@ -40,6 +40,6 @@ const Banner: FC<{
     }
   };
 
-  return <div />;
+  return <Fragment />;
 };
 export default Banner;
