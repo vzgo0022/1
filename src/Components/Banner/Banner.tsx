@@ -1,45 +1,50 @@
-import React, { FC, Fragment, useState } from "react";
-import { faceProductList, faceTeg } from "../../Type/Interface";
+import React, { FC, Fragment, useState, useMemo } from "react";
 
 const Banner: FC<{
-  array: faceProductList[];
+  array: JSX.Element[];
   yardage: number;
-  section: faceTeg[];
-}> = ({ array, yardage, section }) => {
-  const [ListElem, setListElem] = useState<faceProductList[]>(
-    array.slice(0, yardage)
-  );
-  const [index, setIndex] = useState<number>(yardage);
-  const [category, setCategory] = useState<faceTeg>(section[0]);
-  const [cateIndex, setCateIndex] = useState<number>(0);
+}> = ({ array, yardage }) => {
+  const [ListElem, setListElem] = useState<JSX.Element[]>([]);
+  const [index, setIndex] = useState<number>(0);
+
+  useMemo(() => {
+    setListElem(array.slice(0, yardage));
+    setIndex(yardage);
+  }, [array]);
 
   const arryForth = () => {
-    if (index === array.length) {
+    if (index >= array.length) {
       setListElem(array.slice(0, yardage));
       setIndex(yardage);
-      setCategory(section[0]);
-      setCateIndex(0);
-    } else {
+    } else if (index + yardage < array.length) {
       setListElem(array.slice(index, index + yardage));
-      setIndex(index => index + yardage);
-      setCategory(section[cateIndex + 1]);
-      setCateIndex(index => index + 1);
+      setIndex(index + yardage);
+    } else {
+      setListElem(array.slice(index, (array.length % yardage) + index));
+      setIndex(index + yardage);
     }
   };
   const arryBeck = () => {
-    if (index === yardage) {
-      setListElem(array.slice(array.length - yardage, array.length));
-      setIndex(array.length);
-      setCategory(section[section.length]);
-      setCateIndex(section.length);
-    } else {
+    if (index - yardage > yardage) {
       setListElem(array.slice(index - yardage * 2, index - yardage));
-      setIndex(index => index - yardage);
-      setCategory(section[cateIndex - 1]);
-      setCateIndex(index => index - 1);
+      setIndex(index - yardage);
+    } else if (index - yardage === yardage) {
+      setListElem(array.slice(0, yardage));
+      setIndex(yardage);
+    } else {
+      setListElem(
+        array.slice(array.length - (array.length % yardage), array.length)
+      );
+      setIndex(array.length - (array.length % yardage) + yardage);
     }
   };
 
-  return <Fragment />;
+  return (
+    <Fragment>
+      <button onClick={arryForth}>{">"}</button>
+      <button onClick={arryBeck}>{"<"}</button>
+      <Fragment>{ListElem}</Fragment>
+    </Fragment>
+  );
 };
 export default Banner;

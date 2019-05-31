@@ -16,13 +16,6 @@ export interface facUseState<T> {
   readonly funcChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
 }*/
 
-export interface ProdSelect {
-  arrCateProd: [string][];
-  valueSec: string;
-  prodSecKey: number;
-  funcChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-}
-
 //react-router-dom
 
 export interface faceNavLink extends NavLinkProps {
@@ -56,10 +49,11 @@ export interface faceProduct {
   readonly alt: string;
   readonly material: string;
   readonly location: string;
-  readonly src: [string][];
-  readonly color: [string][];
-  readonly saiz: [string][];
-  readonly price: [string][];
+  readonly src: string[][];
+  readonly color: string[][];
+  readonly saiz: string[][];
+  readonly price: string[][];
+  readonly agility:boolean[];
 }
 
 export interface faceProductList extends faceProduct {
@@ -67,23 +61,42 @@ export interface faceProductList extends faceProduct {
   readonly to: string;
 }
 
+export interface ProdSelect<T> {
+  readonly arr1: string[][];
+  readonly arr2: string[][];
+  readonly arr3: string[][];
+  readonly setValue1: Dispatch<SetStateAction<T>>;
+  readonly setValue2: Dispatch<SetStateAction<T>>;
+  readonly setValue3: Dispatch<SetStateAction<T>>;
+  readonly setValueIndex: Dispatch<
+    SetStateAction<{
+      headIndex: number;
+      chaptersIndex: number;
+    }>
+  >;
+  readonly headIndex: number;
+  readonly value: T;
+  readonly prodSecKey: number;
+  readonly agility:boolean;
+}
+
 //Teg
 export interface faceTeg {
   readonly Tag: string;
   readonly key: string;
 }
-////////////////////////////////////uxellllllllll
-export interface faceTegOption
+
+export interface faceTegWithText
   extends OptionHTMLAttributes<HTMLOptionElement>,
     faceTeg {
   readonly text: string | number;
 }
-export interface faceTegInput
+export interface faceTegWithoutText
   extends InputHTMLAttributes<HTMLInputElement>,
     faceTeg {}
 
 //Server
-
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 export interface fecHandler {
   readonly array: faceProductList[];
   readonly value: string;

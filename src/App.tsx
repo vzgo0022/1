@@ -3,7 +3,7 @@ import Nav from "./Components/Nav/Nav";
 
 const App: FC = () => (
   <Fragment>
-    <Nav />
+  <Nav/>
   </Fragment>
 );
 

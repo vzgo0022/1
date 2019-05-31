@@ -1,3 +1,3 @@
-import NavReact from "./Nav";
+import Nav from "./Nav";
 
-export default NavReact;
+export default Nav;

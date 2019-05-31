@@ -1,6 +1,6 @@
-import { faceTegOption } from "../../Type/Interface";
+import { faceTegWithText } from "../../Type/Interface";
 
-export const ConveyorProductOption: faceTegOption[] = [
+export const ConveyorProductOption: faceTegWithText[] = [
   {
     Tag: "option",
     key: "15Conveyor15ProductArray15",
@@ -20,10 +20,5 @@ export const ConveyorProductOption: faceTegOption[] = [
     Tag: "option",
     key: "30Conveyor30ProductArray30",
     text: 140
-  },
-  {
-    Tag: "option",
-    key: "30Conveyor30ProductArray30",
-    text: 200
   }
 ];

@@ -1,67 +1,88 @@
-import React, { FC, Fragment, useContext, useState } from "react";
+import React, { FC, Fragment, useContext, useEffect, useState } from "react";
 
 import { server } from "../../index";
-import { faceProductList } from "../../Type/Interface";
-import { SearchTextOption } from "./SearchProdArray";
-import { inputSetSearch } from "./SarchProdObject";
-import Error from "../Error";
+import HandlerErr from "../HandlerErr";
+import Loding from "../Loding";
+import { faceProductList, faceMatch } from "../../Type/Interface";
 import ConveyorProduct from "../ConveyorProduct/ConveyorProduct";
-import {DupTegText} from "../../Containers/DupComp/DupTeg/DupTeg";
 import NotFound from "../NotFound";
 
-const SearchProd: FC = () => {
+const SearchProd: FC<{ match: faceMatch<{ schProd: string }> }> = ({
+  match
+}) => {
   const serverObj = useContext(server);
-  const [valueSearch, setSearch] = useState<string>("");
-  const [id, useSetId] = useState<string>("All");
   const [reqSearch, setReqSearch] = useState<faceProductList[]>([]);
-  const [boolSearch, setBool] = useState<boolean>(false);
-  const [exValSear, setExValSear] = useState<string>("");
+  const [nothFound, setNothFound] = useState<boolean>(false);
   const [resError, setResError] = useState<string>("");
+  const [searchNam, setSearchNam] = useState<string>("");
+  const [page, setPage] = useState({ Page: 0, ListPage: 15, Params:"" });
 
-  const onSearch = event => {
-    try {
-      serverObj.handler(id, valueSearch).then(({ array, value, error }) => {
-        if (error !== "successfully") {
-          setResError(error);
-        } else if (array.length) {
-          setReqSearch(array);
-          setBool(true);
+  useEffect(() => {
+    (async () => {
+      try {
+        await setResError("");
+        await setSearchNam("");
+        await setReqSearch([]);
+        await setNothFound(false);
+        const searchParams = await new URLSearchParams(match.params.schProd);
+        const BoolPage = await (!Number.isNaN(+`${searchParams.get("Page")}`) &&
+          !!searchParams.get("Page"));
+        const BoolListPage = await (!Number.isNaN(
+          +`${searchParams.get("ListPage")}`
+        ) && !!searchParams.get("ListPage"));
+
+        if (
+          !searchParams.get("Categories") ||
+          !searchParams.get("Search") ||
+          !BoolPage ||
+          !BoolListPage
+        ) {
+          throw new Error("Page Not Found 404");
         } else {
-          setExValSear(value);
-          setBool(false);
+          
+          setPage({
+            Page: +`${searchParams.get("Page")}`,
+            ListPage: +`${searchParams.get("ListPage")}`,
+            Params:match.params.schProd.split("&", 2).map(e => e + "&").join("")
+          });
         }
-      });
-    } catch (error) {
-      setResError(error.message);
-    }
-    event.preventDefault();
-  };
+        const Categories =
+          (await searchParams.get("Categories")) !== "All" &&
+          searchParams.get("Categories")
+            ? `${searchParams.get("Categories")}.json`
+            : ".json";
+        const Search = await `${searchParams.get("Search")}`;
+        const res = await serverObj.handlerSearch(Categories, Search);
+        if (Array.isArray(res) && !!res.length) {
+          setReqSearch(res);
+        } else if (Array.isArray(res)) {
+          setNothFound(!res.length);
+          setSearchNam(Search);
+        } else if (typeof res === "string") {
+          setResError(res);
+        }
+      } catch (error) {
+        setResError(error.message);
+      }
+    })();
+  }, [match]);
+
+  if (resError !== "") {
+    return <HandlerErr error={resError} />;
+  } else if (nothFound) {
+    return <NotFound prodName={searchNam} />;
+  } else if (!reqSearch.length && !nothFound) {
+    return <Loding />;
+  }
 
   return (
     <Fragment>
-      <form onSubmit={onSearch}>
-        <input
-          {...inputSetSearch}
-          onChange={({ target }) => {
-            setSearch(target.value);
-          }}
-        />
-        <input type={"submit"} value={"search"} />
-        <select
-          value={id}
-          onChange={({ target: { value } }) => {
-            useSetId(value);
-          }}
-        >
-          <DupTegText array={SearchTextOption} />
-        </select>
-      </form>
-      {boolSearch ? (
-        <ConveyorProduct arrConvProd={reqSearch} />
-      ) : (
-        exValSear && <NotFound prodName={exValSear} />
-      )}
-      {resError && <Error error={resError} />}
+      <ConveyorProduct
+        arrConvProd={reqSearch}
+        ListPage={page.ListPage}
+        Page={page.Page}
+        Params={page.Params}
+      />
     </Fragment>
   );
 };

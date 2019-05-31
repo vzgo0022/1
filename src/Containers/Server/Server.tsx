@@ -1,13 +1,13 @@
-import { fecHandler } from "../../Type/Interface";
+import { faceProductList } from "../../Type/Interface";
 
 class Server {
   private url: string = "https://foo0022.firebaseio.com/";
 
-  public async request(id: string): Promise<object | string> {
+  public async request(categories: string): Promise<object | string> {
     try {
-      const res = await fetch(`${this.url}${id}`);
+      const res = await fetch(`${this.url}${categories}`);
       if (!res.ok) {
-        throw Error("Page Not Found 404");
+        throw new Error("Page Not Found 404");
       }
       const resArr: object = await res.json();
       return resArr;
@@ -16,53 +16,33 @@ class Server {
     }
   }
 
-  public async handler(id: string, valueSearch: string): Promise<fecHandler> {
-    switch (id) {
-      case "All":
-        id = ".json";
-        break;
-
-      case "Mens":
-        id = "man.json";
-        break;
-
-      case "Womens":
-        id = "woman.json";
-        break;
-
-      case "Childrens":
-        id = "child.json";
-        break;
+  public async handlerSearch(
+    categories = ".json",
+    valueSearch = ""
+  ): Promise<faceProductList[] | string> {
+    const prodObj = await this.request(categories);
+    if (typeof prodObj === "string") {
+      return prodObj;
+    } else if (categories === ".json") {
+      return Object.values(prodObj)
+        .map(v => Object.values(v).flat())
+        .flat()
+        .filter(({ title }) => title.includes(valueSearch));
+    } else {
+      return Object.values(prodObj)
+        .flat()
+        .filter(({ title }) => title.includes(valueSearch));
     }
-    return await this.request(id)
-      .then(resArray => {
-        if (typeof resArray === "string") {
-          throw Error(resArray); 
-        } else if (valueSearch) {
-          return {
-            array: Object.values(resArray)
-              .flat()
-              .filter(({ title }) => title.includes(valueSearch)),
-            value: valueSearch,
-            error: "successfully"
-          };
-        } else {
-          return {
-            array: Object.values(resArray).flat(),
-            value: valueSearch,
-            error: "successfully"
-          };
-        }
-      })
-      .catch(error => {
-        console.error(error);
-        return {
-          array: [],
-          value: valueSearch,
-          error: error.message
-        };
-      });
+  }
+  public async handlerCategories(
+    categories: string
+  ): Promise<faceProductList[] | string> {
+    const prodObj = await this.request(categories);
+    if (typeof prodObj === "string") {
+      return prodObj;
+    } else {
+      return Object.values(prodObj).flat();
+    }
   }
 }
-
 export default Server;
