@@ -1,69 +1,103 @@
-import React, { FC, Fragment, useEffect, useState, memo } from "react";
-import { NavLink } from "react-router-dom";
+import React, {
+  FC,
+  Fragment,
+  useEffect,
+  useCallback,
+  useState,
+  memo
+} from "react";
+import { createBrowserHistory } from "history";
+const history = createBrowserHistory();
 
 import ListProduct from "../ListProduct";
-import { DupTegText } from "../../Containers/DupComp/DupTeg/DupTeg";
-import { ConveyorProductOption } from "./ConveyorProductArray";
 import { faceProductList } from "../../Type/Interface";
 
 const ConveyorProduct: FC<{
   arrConvProd: faceProductList[];
   ListPage: number;
   Page: number;
-  Params:string;
-}> = ({ arrConvProd=[], ListPage=15, Page=1,Params="" }) => {
+  Params: string;
+}> = ({ arrConvProd = [], ListPage = 15, Page = 1, Params = "" }) => {
   const [arrCon, setArrCon] = useState<faceProductList[][]>([]);
   const [conIndex, setConIndex] = useState<number>(0);
   const [listIndex, setListIndex] = useState<number>(0);
   const [prodLengt, setProdLengt] = useState<number>(15);
-  console.log("55")
+
+  console.log(ListPage, Page, Params);
+  const ListBooClick = useCallback(
+    index => {
+      history.push(`${Params}ListPage=${prodLengt}&Page=${index + 1}`);
+      if (index >= 0 && index < arrCon.length) {
+        window.scrollTo(0, 0);
+        setConIndex(index);
+        index > 5 ? setListIndex(index - 5) : setListIndex(0);
+      }
+    },
+    [conIndex, arrCon, listIndex]
+  );
+
+  const ListOptiClick = useCallback(
+    (newLengt: number, newPage: number) => {
+      window.scrollTo(0, 0);
+      if (newPage === 1 && newLengt < 15) {
+        setProdLengt(15);
+        setListIndex(0);
+        setConIndex(0);
+      }
+      history.push(`${Params}ListPage=${newLengt}&Page=${newPage}`);
+      const arrList: faceProductList[][] = [];
+      for (let i = 0; i < arrConvProd.length; i += newLengt) {
+        arrList.push(arrConvProd.slice(i, i + newLengt));
+      }
+      setArrCon(arrList);
+    },
+    [arrConvProd, conIndex]
+  );
+
   useEffect(() => {
-    const BoolPage = Page > 0 && Page <= Math.ceil(arrConvProd.length / ListPage);
+    const BoolPage =
+      Page > 0 && Page <= Math.ceil(arrConvProd.length / ListPage);
     const BoolListPage = [15, 30, 70, 140].includes(ListPage);
     if (BoolPage && BoolListPage) {
       setProdLengt(ListPage);
       setConIndex(Page - 1);
+      ListOptiClick(ListPage, Page);
       if (Page > 6) {
         setListIndex(Page - 6);
       }
     } else {
-      setProdLengt(15);
-      setListIndex(0);
-      setConIndex(0);
+      ListOptiClick(15, 1);
     }
-    let arrList: faceProductList[][] = [];
-    for (let i = 0; i < arrConvProd.length; i += prodLengt) {
-      arrList.push(arrConvProd.slice(i, i + prodLengt));
-    }
-    setArrCon(arrList);
   }, [arrConvProd]);
 
   return (
     <Fragment>
       {!!arrCon.length && (
         <Fragment>
-          <ListProduct
-            arrListProd={arrCon[conIndex]}
-            ListIndx={conIndex * prodLengt}
-          />
+          <ListProduct arrListProd={arrCon[conIndex]} />
           <Fragment>
             {arrCon
               .map((value, index) => (
-                <NavLink 
-                to={Params?`${Params}ListPage=${prodLengt}&Page=${index + 1}`:`ListPage=${prodLengt}&Page=${index + 1}`}
-                //onClick={()=>history.push('/foo')}
-                key={`${arrCon[index][0].id}`}>
+                <button
+                  onClick={() => {
+                    ListBooClick(index);
+                  }}
+                  key={`${arrCon[index][0].id}`}
+                >
                   {index + 1}
-                </NavLink>
+                </button>
               ))
               .slice(listIndex, listIndex + 10)}
             <select
               value={prodLengt}
               onChange={({ target: { value } }) => {
                 setProdLengt(+value);
+                ListOptiClick(+value, 1);
               }}
             >
-              <DupTegText array={ConveyorProductOption} />
+              {[15, 30, 70, 140].map((val, ind) => (
+                <option key={ind + 0.1 + val}>{val}</option>
+              ))}
             </select>
           </Fragment>
         </Fragment>

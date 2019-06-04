@@ -13,7 +13,7 @@ const ButSearch: FC<{ match: faceMatch<{ PageList: string }> }> = ({
   const [arrProd, setArrProd] = useState<faceProductList[]>([]);
   const [resError, setResError] = useState<string>("");
   const [page, setPage] = useState({ Page: 0, ListPage: 15 });
-
+  
   useEffect(() => {
     (async () => {
       try {
@@ -54,7 +54,9 @@ const ButSearch: FC<{ match: faceMatch<{ PageList: string }> }> = ({
         arrConvProd={arrProd}
         ListPage={page.ListPage}
         Page={page.Page}
-        Params={""}
+        Params={`${match.url.replace(
+          `${match.params.PageList}`,
+          "")}`}
       />
     </Fragment>
   );

@@ -6,8 +6,10 @@ import Product from "../Product";
 import FormSearch from "../FormSearch";
 import SearchProd from "../SearchProd";
 import HandlerErr from "../HandlerErr";
-import { faceMatch } from "../../Type/Interface";
 import Head from "../Head/Head";
+import ButtLogSing from "../ButtLogSing/ButtLogSing";
+import Logo from "../Logo";
+import { faceMatch } from "../../Type/Interface";
 
 const page = "ListPage=15&Page=1";
 const renderProduct = ({
@@ -16,36 +18,52 @@ const renderProduct = ({
   match: faceMatch<{ product: string }>;
 }) => (
   <Fragment>
-    <FormSearch params={""}/>
+    <Logo/>
+    <FormSearch params={""} />
     <Product match={match} />
   </Fragment>
 );
 
-const renderUntitled = ({ match }: { match: faceMatch<{PageList:string}> }) => (
+const renderUntitled = ({
+  match
+}: {
+  match: faceMatch<{ PageList: string }>;
+}) => (
   <Fragment>
+    <Logo/>
     <FormSearch params={""} />
     <ButSearch match={match} />
   </Fragment>
 );
 
 const Nav: FC = () => {
-  
   return (
     <nav>
-      <NavLink to={"/"}>{"Foo"}</NavLink>
       <NavLink to={`/Mens/Hat/${page}`}>{"Hat"}</NavLink> <br />
       <NavLink to={`/Mens/Jacket/${page}`}>{"Jacket"}</NavLink> <br />
       <NavLink to={`/Mens/Pants/${page}`}>{"Pants"}</NavLink> <br />
       <NavLink to={`/Mens/Shoes/${page}`}>{"Shoes"}</NavLink> <br />
       <NavLink to={`/Mens/Suit/${page}`}>{"Suit"}</NavLink> <br />
+      <NavLink to={`/`}>{"Hat"}</NavLink> <br />
+      <NavLink to={`/`}>{"Jacket"}</NavLink> <br />
+      <NavLink to={`/`}>{"Pants"}</NavLink> <br />
+      <NavLink to={`/`}>{"Shoes"}</NavLink> <br />
+      <NavLink to={`/`}>{"Suit"}</NavLink> <br />
+      <NavLink to={`/`}>{"Hat"}</NavLink> <br />
+      <NavLink to={`/`}>{"Jacket"}</NavLink> <br />
+      <NavLink to={`/`}>{"Pants"}</NavLink> <br />
+      <NavLink to={`/`}>{"Shoes"}</NavLink> <br />
+      <NavLink to={`/`}>{"Suit"}</NavLink> <br />
       <Switch>
         <Route
           path="/"
           exact
-          render={({ match }) => ( 
-            <Fragment> 
-              <FormSearch  params={""}/>
-              <Head match={match}/>
+          render={({ match }) => (
+            <Fragment>
+              <Logo/>
+              <FormSearch params={""} />
+              <ButtLogSing/>
+              <Head match={match} />
             </Fragment>
           )}
         />
@@ -69,7 +87,10 @@ const Nav: FC = () => {
         <Route path="/Mens/Pants/:PageList" render={renderUntitled} />
         <Route path="/Mens/Shoes/:PageList" render={renderUntitled} />
         <Route path="/Mens/Suit/:PageList" render={renderUntitled} />
-        <Route path="*" render={()=><HandlerErr error={"Page Not Found 404"}/>} />
+        <Route
+          path="*"
+          render={() => <HandlerErr error={"Page Not Found 404"} />}
+        />
       </Switch>
     </nav>
   );

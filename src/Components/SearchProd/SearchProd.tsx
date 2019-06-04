@@ -43,7 +43,7 @@ const SearchProd: FC<{ match: faceMatch<{ schProd: string }> }> = ({
           setPage({
             Page: +`${searchParams.get("Page")}`,
             ListPage: +`${searchParams.get("ListPage")}`,
-            Params:match.params.schProd.split("&", 2).map(e => e + "&").join("")
+            Params:`/sch/${match.params.schProd.split("&", 2).map(e => e + "&").join("")}`
           });
         }
         const Categories =
