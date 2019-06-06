@@ -6,9 +6,8 @@ import Product from "../Product";
 import FormSearch from "../FormSearch";
 import SearchProd from "../SearchProd";
 import HandlerErr from "../HandlerErr";
-import Head from "../Head/Head";
+import Head from "../Head";
 import ButtLogSing from "../ButtLogSing/ButtLogSing";
-import Logo from "../Logo";
 import { faceMatch } from "../../Type/Interface";
 
 const page = "ListPage=15&Page=1";
@@ -18,7 +17,6 @@ const renderProduct = ({
   match: faceMatch<{ product: string }>;
 }) => (
   <Fragment>
-    <Logo/>
     <FormSearch params={""} />
     <Product match={match} />
   </Fragment>
@@ -30,7 +28,6 @@ const renderUntitled = ({
   match: faceMatch<{ PageList: string }>;
 }) => (
   <Fragment>
-    <Logo/>
     <FormSearch params={""} />
     <ButSearch match={match} />
   </Fragment>
@@ -60,7 +57,6 @@ const Nav: FC = () => {
           exact
           render={({ match }) => (
             <Fragment>
-              <Logo/>
               <FormSearch params={""} />
               <ButtLogSing/>
               <Head match={match} />

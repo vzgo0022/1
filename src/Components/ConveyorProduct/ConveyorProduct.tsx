@@ -23,8 +23,7 @@ const ConveyorProduct: FC<{
   const [listIndex, setListIndex] = useState<number>(0);
   const [prodLengt, setProdLengt] = useState<number>(15);
 
-  console.log(ListPage, Page, Params);
-  const ListBooClick = useCallback(
+  const ListBooClick = useCallback( ///////////useCallback
     index => {
       history.push(`${Params}ListPage=${prodLengt}&Page=${index + 1}`);
       if (index >= 0 && index < arrCon.length) {

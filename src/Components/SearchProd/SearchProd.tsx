@@ -1,6 +1,5 @@
-import React, { FC, Fragment, useContext, useEffect, useState } from "react";
+import React, { FC, Fragment, useEffect, useState } from "react";
 
-import { server } from "../../index";
 import HandlerErr from "../HandlerErr";
 import Loding from "../Loding";
 import { faceProductList, faceMatch } from "../../Type/Interface";
@@ -10,7 +9,6 @@ import NotFound from "../NotFound";
 const SearchProd: FC<{ match: faceMatch<{ schProd: string }> }> = ({
   match
 }) => {
-  const serverObj = useContext(server);
   const [reqSearch, setReqSearch] = useState<faceProductList[]>([]);
   const [nothFound, setNothFound] = useState<boolean>(false);
   const [resError, setResError] = useState<string>("");
@@ -18,12 +16,14 @@ const SearchProd: FC<{ match: faceMatch<{ schProd: string }> }> = ({
   const [page, setPage] = useState({ Page: 0, ListPage: 15, Params:"" });
 
   useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
     (async () => {
+       setResError("");
+       setSearchNam("");
+       setReqSearch([]);
+       setNothFound(false);
       try {
-        await setResError("");
-        await setSearchNam("");
-        await setReqSearch([]);
-        await setNothFound(false);
         const searchParams = await new URLSearchParams(match.params.schProd);
         const BoolPage = await (!Number.isNaN(+`${searchParams.get("Page")}`) &&
           !!searchParams.get("Page"));
@@ -39,7 +39,6 @@ const SearchProd: FC<{ match: faceMatch<{ schProd: string }> }> = ({
         ) {
           throw new Error("Page Not Found 404");
         } else {
-          
           setPage({
             Page: +`${searchParams.get("Page")}`,
             ListPage: +`${searchParams.get("ListPage")}`,
@@ -47,24 +46,37 @@ const SearchProd: FC<{ match: faceMatch<{ schProd: string }> }> = ({
           });
         }
         const Categories =
-          (await searchParams.get("Categories")) !== "All" &&
+        await ( searchParams.get("Categories")) !== "All" &&
           searchParams.get("Categories")
             ? `${searchParams.get("Categories")}.json`
             : ".json";
         const Search = await `${searchParams.get("Search")}`;
-        const res = await serverObj.handlerSearch(Categories, Search);
-        if (Array.isArray(res) && !!res.length) {
-          setReqSearch(res);
-        } else if (Array.isArray(res)) {
-          setNothFound(!res.length);
+        
+        const Res = await fetch(`https://foo0022.firebaseio.com/${Categories}`,{ signal: signal });
+        if (!Res.ok) { 
+          throw new Error("Page Not Found 404");
+        } 
+        const ResObj = await Res.json();
+
+        const ResArr = await ( Categories === ".json")?Object.values(ResObj)
+            .map(v => Object.values(v).flat())
+            .flat()
+            .filter(({ title }) => title.includes(Search))
+       :
+          Object.values(ResObj)
+            .flat()
+            .filter(({ title }) => title.includes(Search));
+        if (!!ResArr.length) {
+          setReqSearch(ResArr);
+        } else {
+          setNothFound(!ResArr.length);
           setSearchNam(Search);
-        } else if (typeof res === "string") {
-          setResError(res);
         }
       } catch (error) {
-        setResError(error.message);
+        if(error.name !== "AbortError") {setResError(error.message);}
       }
     })();
+    return () =>{ abortController.abort();};
   }, [match]);
 
   if (resError !== "") {
