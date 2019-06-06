@@ -39,9 +39,8 @@ const Product: FC<{ match: faceMatch<{ product: string }> }> = ({ match }) => {
           `Product/${match.params.product}`,
           ""
         )}${Length}.json`,{ signal: signal });
-        
         const Product = await Res.json();
-        if (!Res.ok && !Product) {
+        if (!Res.ok || !Product) {
           throw new Error("Page Not Found 404");
         }
         await setProd(Product);
