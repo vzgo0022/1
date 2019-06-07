@@ -28,7 +28,7 @@ const Product: FC<{ match: faceMatch<{ product: string }> }> = ({ match }) => {
     const signal = abortController.signal;
     (async () => {
       setResError("");
-      setProd(Object);
+      setProd(Object); //?
       try {
         const searchParams = await new URLSearchParams(match.params.product);
         if (Number.isNaN(+`${searchParams.get("Length")}`)) {
@@ -43,6 +43,7 @@ const Product: FC<{ match: faceMatch<{ product: string }> }> = ({ match }) => {
         if (!Res.ok || !Product) {
           throw new Error("Page Not Found 404");
         }
+        document.title=`${Product.title}`;
         await setProd(Product);
         oneIndexImg.current = await Product.src.flat();
         await setListImg(
@@ -138,7 +139,7 @@ const Product: FC<{ match: faceMatch<{ product: string }> }> = ({ match }) => {
         />
       )}
       <img
-        src={`http://localhost:3000/${
+        src={`${
           prod.src[twoIndexImg.headIndex][twoIndexImg.chaptersIndex]
         }`}
         alt={prod.title}

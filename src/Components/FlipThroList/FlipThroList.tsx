@@ -29,7 +29,7 @@ const FlipThroList: FC<{
       );
       setElemIndx(Math.floor(IndxImg / arrLeng) * arrLeng - arrLeng);
     }
-  }, [IndxImg]);
+  }, [arrLeng,arrTeg,IndxImg,elemIndx]);
 
   const arryForth = () => {
     if (elemIndx < arrTeg.length) {

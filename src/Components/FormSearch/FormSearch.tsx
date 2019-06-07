@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState,useMemo } from "react";
+import React, { FC, useState,useMemo } from "react";
 import { NavLink } from "react-router-dom";
 
 import { DupTegText } from "../../Containers/DupComp/DupTeg/DupTeg";
@@ -8,16 +8,16 @@ import { FormSearchInput } from "./FormSearchObject";
 const FormSearch: FC<{ params: string }> = ({
    params 
 }) => {
-  const [category, useCategory] = useState<string>("All");
+  const [category, setCategory] = useState<string>("All");
   const [search, setSearch] = useState<string>("");
-  useMemo(() => {                      ////////??????????
+  useMemo(() => {             
      const searchParams = new URLSearchParams(params);
     if (!!searchParams.get("Categories")&&!!searchParams.get("Search")) {
-          useCategory(`${searchParams.get("Categories")}`); 
+          setCategory(`${searchParams.get("Categories")}`); 
           setSearch(`${searchParams.get("Search")}`);   
     } else {
       setSearch("");
-      useCategory("All")
+      setCategory("All")
     }
   }, [params]);
 
@@ -37,7 +37,7 @@ const FormSearch: FC<{ params: string }> = ({
       <select
         value={category}
         onChange={({ target: { value } }) => {
-          useCategory(value);
+          setCategory(value);
         }}
       >
         <DupTegText array={FormSearchOption} />

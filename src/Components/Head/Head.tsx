@@ -35,7 +35,7 @@ const Head: FC<{ match: faceMatch<{}> }> = ({ match }) => {
                 <NavLink to={`${to}${`&Length=${indx}`}`}>
                   <br />
                   <img
-                    src={`http://localhost:3000/${src[0][0]}`}
+                    src={`/${src[0][0]}`}
                     alt={title}
                     height={"220px"}
                     width={"220px"}

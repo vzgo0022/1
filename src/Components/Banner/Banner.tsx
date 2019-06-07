@@ -10,7 +10,7 @@ const Banner: FC<{
   useMemo(() => {
     setListElem(array.slice(0, yardage));
     setIndex(yardage);
-  }, [array]);
+  }, [array,yardage]);
 
   const arryForth = () => {
     if (index >= array.length) {

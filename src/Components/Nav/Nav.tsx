@@ -36,7 +36,7 @@ const renderUntitled = ({
 const Nav: FC = () => {
   return (
     <nav>
-      <NavLink to={`/Mens/Hat/${page}`}>{"Hat"}</NavLink> <br />
+      <NavLink to={`/Mens/Hat/${page}`}>{"Hats"}</NavLink> <br />
       <NavLink to={`/Mens/Jacket/${page}`}>{"Jacket"}</NavLink> <br />
       <NavLink to={`/Mens/Pants/${page}`}>{"Pants"}</NavLink> <br />
       <NavLink to={`/Mens/Shoes/${page}`}>{"Shoes"}</NavLink> <br />

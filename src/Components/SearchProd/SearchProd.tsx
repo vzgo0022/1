@@ -53,11 +53,11 @@ const SearchProd: FC<{ match: faceMatch<{ schProd: string }> }> = ({
         const Search = await `${searchParams.get("Search")}`;
         
         const Res = await fetch(`https://foo0022.firebaseio.com/${Categories}`,{ signal: signal });
-        if (!Res.ok) { 
+        const ResObj:Object | null = await Res.json(); //?
+        if (!Res.ok || !ResObj) { 
           throw new Error("Page Not Found 404");
         } 
-        const ResObj = await Res.json();
-
+        document.title=`${Search} | Amasia`;
         const ResArr = await ( Categories === ".json")?Object.values(ResObj)
             .map(v => Object.values(v).flat())
             .flat()

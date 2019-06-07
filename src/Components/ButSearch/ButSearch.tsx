@@ -40,10 +40,12 @@ const ButSearch: FC<{ match: faceMatch<{ PageList: string }> }> = ({
           )}.json`}`,
           { signal: signal }
         );
-        if (!Res.ok) {
+        const ResObj = await Res.json();
+        if (!Res.ok ||!ResObj) {
           throw new Error("Page Not Found 404");
         }
-        const ResObj = await Res.json();
+       const TitleNam=match.path.split("/");
+        document.title=`${TitleNam[1]}   ${TitleNam[2]}`;
         const ResArr = await Object.values(ResObj).flat();
         await setArrProd(ResArr);
       } catch (error) {

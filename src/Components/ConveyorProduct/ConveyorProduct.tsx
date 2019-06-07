@@ -7,10 +7,9 @@ import React, {
   memo
 } from "react";
 import { createBrowserHistory } from "history";
+import ListProduct from "../ListProduct"; 
+import { faceProductList } from "../../Type/Interface"; 
 const history = createBrowserHistory();
-
-import ListProduct from "../ListProduct";
-import { faceProductList } from "../../Type/Interface";
 
 const ConveyorProduct: FC<{
   arrConvProd: faceProductList[];
@@ -23,17 +22,14 @@ const ConveyorProduct: FC<{
   const [listIndex, setListIndex] = useState<number>(0);
   const [prodLengt, setProdLengt] = useState<number>(15);
 
-  const ListBooClick = useCallback( ///////////useCallback
-    index => {
-      history.push(`${Params}ListPage=${prodLengt}&Page=${index + 1}`);
-      if (index >= 0 && index < arrCon.length) {
-        window.scrollTo(0, 0);
-        setConIndex(index);
-        index > 5 ? setListIndex(index - 5) : setListIndex(0);
-      }
-    },
-    [conIndex, arrCon, listIndex]
-  );
+  const ListBooClick = index => {
+    history.push(`${Params}ListPage=${prodLengt}&Page=${index + 1}`);
+    if (index >= 0 && index < arrCon.length) {
+      window.scrollTo(0, 0);
+      setConIndex(index);
+      index > 5 ? setListIndex(index - 5) : setListIndex(0);
+    }
+  };
 
   const ListOptiClick = useCallback(
     (newLengt: number, newPage: number) => {
@@ -50,7 +46,7 @@ const ConveyorProduct: FC<{
       }
       setArrCon(arrList);
     },
-    [arrConvProd, conIndex]
+    [arrConvProd, Params]
   );
 
   useEffect(() => {
@@ -67,7 +63,7 @@ const ConveyorProduct: FC<{
     } else {
       ListOptiClick(15, 1);
     }
-  }, [arrConvProd]);
+  }, [arrConvProd, ListOptiClick, ListPage, Page]);
 
   return (
     <Fragment>
