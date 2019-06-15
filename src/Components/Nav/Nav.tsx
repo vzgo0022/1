@@ -1,94 +1,30 @@
-import React, { FC, Fragment } from "react";
-import { NavLink, Route, Switch } from "react-router-dom";
-
-import ButSearch from ".././ButSearch";
-import Product from "../Product";
-import FormSearch from "../FormSearch";
-import SearchProd from "../SearchProd";
-import HandlerErr from "../HandlerErr";
-import Head from "../Head";
-import ButtLogSing from "../ButtLogSing/ButtLogSing";
-import { faceMatch } from "../../Type/Interface";
+import React, { Fragment } from "react";
+import { NavLink } from "react-router-dom";
 
 const page = "ListPage=15&Page=1";
-const renderProduct = ({
-  match
-}: {
-  match: faceMatch<{ product: string }>;
-}) => (
-  <Fragment>
-    <FormSearch params={""} />
-    <Product match={match} />
-  </Fragment>
-);
 
-const renderUntitled = ({
-  match
-}: {
-  match: faceMatch<{ PageList: string }>;
-}) => (
-  <Fragment>
-    <FormSearch params={""} />
-    <ButSearch match={match} />
-  </Fragment>
-);
-
-const Nav: FC = () => {
+const Nav = () => {
   return (
-    <nav>
-      <NavLink to={`/Mens/Hat/${page}`}>{"Hats"}</NavLink> <br />
-      <NavLink to={`/Mens/Jacket/${page}`}>{"Jacket"}</NavLink> <br />
-      <NavLink to={`/Mens/Pants/${page}`}>{"Pants"}</NavLink> <br />
-      <NavLink to={`/Mens/Shoes/${page}`}>{"Shoes"}</NavLink> <br />
-      <NavLink to={`/Mens/Suit/${page}`}>{"Suit"}</NavLink> <br />
-      <NavLink to={`/`}>{"Hat"}</NavLink> <br />
-      <NavLink to={`/`}>{"Jacket"}</NavLink> <br />
-      <NavLink to={`/`}>{"Pants"}</NavLink> <br />
-      <NavLink to={`/`}>{"Shoes"}</NavLink> <br />
-      <NavLink to={`/`}>{"Suit"}</NavLink> <br />
-      <NavLink to={`/`}>{"Hat"}</NavLink> <br />
-      <NavLink to={`/`}>{"Jacket"}</NavLink> <br />
-      <NavLink to={`/`}>{"Pants"}</NavLink> <br />
-      <NavLink to={`/`}>{"Shoes"}</NavLink> <br />
-      <NavLink to={`/`}>{"Suit"}</NavLink> <br />
-      <Switch>
-        <Route
-          path="/"
-          exact
-          render={({ match }) => (
-            <Fragment>
-              <FormSearch params={""} />
-              <ButtLogSing/>
-              <Head match={match} />
-            </Fragment>
-          )}
-        />
-        <Route
-          path="/sch/:schProd"
-          render={({ match }: { match: faceMatch<{ schProd: string }> }) => (
-            <Fragment>
-              <FormSearch params={match.params.schProd} />
-              <SearchProd match={match} />
-            </Fragment>
-          )}
-        />
-        <Route path="/Mens/Hat/Product/:product" render={renderProduct} />
-        <Route path="/Mens/Jacket/Product/:product" render={renderProduct} />
-        <Route path="/Mens/Pants/Product/:product" render={renderProduct} />
-        <Route path="/Mens/Shoes/Product/:product" render={renderProduct} />
-        <Route path="/Mens/Suit/Product/:product" render={renderProduct} />
-        <Route path="/New/Product/:product" render={renderProduct} />
-        <Route path="/Mens/Hat/:PageList" render={renderUntitled} />
-        <Route path="/Mens/Jacket/:PageList" render={renderUntitled} />
-        <Route path="/Mens/Pants/:PageList" render={renderUntitled} />
-        <Route path="/Mens/Shoes/:PageList" render={renderUntitled} />
-        <Route path="/Mens/Suit/:PageList" render={renderUntitled} />
-        <Route
-          path="*"
-          render={() => <HandlerErr error={"Page Not Found 404"} />}
-        />
-      </Switch>
-    </nav>
+    <Fragment>
+      <nav>
+        <NavLink to={`/Mens/Hat/${page}`}>{"Hat"}</NavLink> <br />
+        <NavLink to={`/Mens/Jacket/${page}`}>{"Jacket"}</NavLink> <br />
+        <NavLink to={`/Mens/Pant/${page}`}>{"Pant"}</NavLink> <br />
+        <NavLink to={`/Mens/Shoe/${page}`}>{"Shoe"}</NavLink> <br />
+        <NavLink to={`/Mens/Suit/${page}`}>{"Suit"}</NavLink> <br />
+        <NavLink to={`/Mens/Shirt/${page}`}>{"Shirt"}</NavLink> <br />
+        <NavLink to={`/Womens/Hat/${page}`}>{"Hat"}</NavLink> <br />
+        <NavLink to={`/`}>{"Jacket"}</NavLink> <br />
+        <NavLink to={`/`}>{"Pant"}</NavLink> <br />
+        <NavLink to={`/`}>{"Shoe"}</NavLink> <br />
+        <NavLink to={`/`}>{"Suit"}</NavLink> <br />
+        <NavLink to={`/`}>{"Hat"}</NavLink> <br />
+        <NavLink to={`/`}>{"Jacket"}</NavLink> <br />
+        <NavLink to={`/`}>{"Pant"}</NavLink> <br />
+        <NavLink to={`/`}>{"Shoe"}</NavLink> <br />
+        <NavLink to={`/`}>{"Suit"}</NavLink> <br />
+      </nav>
+    </Fragment>
   );
 };
 

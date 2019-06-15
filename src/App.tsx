@@ -1,11 +1,10 @@
 import React, { FC, Fragment } from "react";
-import Nav from "./Components/Nav/Nav";
-import Logo from "./Components/Logo";
+import RouteCom from "./Components/RouteCom";
+
 
 const App: FC = () => (
   <Fragment>
-  <Logo/>
-  <Nav/>
+    <RouteCom />
   </Fragment>
 );
 

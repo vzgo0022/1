@@ -20,7 +20,7 @@ const FlipThroList: FC<{
         )
       );
       setElemIndx(Math.floor(IndxImg / arrLeng) * arrLeng + arrLeng);
-    } else if (elemIndx !== 0) {
+    } else {
       setArrayTeg(
         arrTeg.slice(
           Math.floor(IndxImg / arrLeng) * arrLeng - arrLeng,
@@ -29,7 +29,7 @@ const FlipThroList: FC<{
       );
       setElemIndx(Math.floor(IndxImg / arrLeng) * arrLeng - arrLeng);
     }
-  }, [arrLeng,arrTeg,IndxImg,elemIndx]);
+  }, [arrLeng,arrTeg,IndxImg]);
 
   const arryForth = () => {
     if (elemIndx < arrTeg.length) {
@@ -46,7 +46,7 @@ const FlipThroList: FC<{
 
   return (
     <Fragment>
-      {newArrayTeg.length > 1 && (
+      {arrTeg.length > 1 && (
         <Fragment>
           {arrTeg.length > arrLeng && (
             <Fragment>

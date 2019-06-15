@@ -11,12 +11,13 @@ const SeaAnsProd: FC<faceProduct> = ({
   price
 }) =>(
   <Fragment>
-    <h3>{title}</h3><br/>
-    <img src={`/${src[0][0]}`} alt={title} height={"220px"} width={"220px"} /><br/>
-    {price.length === 1 ?<span>{price[0][0]}</span>:<span>{`${price[0][0]} to ${price[price.length-1][0]}`}</span>}<br/>
+    <h2 itemProp="name">{title}</h2><br/> 
+    <img src={`/${src[0]}`} alt={title} height={"220px"} width={"220px"} /><br/>
+    <span>{price}</span><br/>
     <span>{prodState}</span><br/>
     <span>{shipping}</span><br/>
     <span>{sold}</span><br/>
+   
   </Fragment>
 );
 

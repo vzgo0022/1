@@ -1,152 +1,131 @@
-import React, { FC, Fragment, useState, useEffect, useRef, memo } from "react";
+import React, { FC, Fragment, useState, useEffect } from "react";
 
-import ProdSelectArr from "../ProdSelectArr";
 import HandlerErr from "../HandlerErr";
 import Loding from "../Loding";
-import FlipThroList from "../FlipThroList";
 import {
   faceMatch,
   faceProductList,
   faceTegWithoutText
 } from "../../Type/Interface";
+import FlipThroList from "../FlipThroList";
 
 const Product: FC<{ match: faceMatch<{ product: string }> }> = ({ match }) => {
-  const [prod, setProd] = useState<faceProductList>(Object);
+  const [prod, setProd] = useState<faceProductList>();
   const [resError, setResError] = useState<string>("");
-  const [categColor, setCategColor] = useState<string>("");
-  const [categPrice, setCategPrice] = useState<string>("");
-  const [categSaiz, setCategSaiz] = useState<string>("");
-  const [twoIndexImg, setTwoIndexImg] = useState<{
-    headIndex: number;
-    chaptersIndex: number;
-  }>({ headIndex: 0, chaptersIndex: 0 });
   const [listImg, setListImg] = useState<faceTegWithoutText[]>([]);
-  const oneIndexImg = useRef<string[]>([]);
-  
+  const [listIndx, setListIndx] = useState<number>(0);
+  const [colorCateg, setColorCateg] = useState<string>("");
+  const [saizCateg, setSaizCateg] = useState<string>("");
+
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
     (async () => {
       setResError("");
-      setProd(Object); //?
+      setProd(undefined);
       try {
         const searchParams = await new URLSearchParams(match.params.product);
         if (Number.isNaN(+`${searchParams.get("Length")}`)) {
           throw new Error("Page Not Found 404");
         }
         const Length = await `${searchParams.get("Length")}`;
-        const Res = await fetch(`https://foo0022.firebaseio.com//${match.url.replace(
-          `Product/${match.params.product}`,
-          ""
-        )}${Length}.json`,{ signal: signal });
+        const Res = await fetch(
+          `https://foo0022.firebaseio.com//${match.url.replace(
+            `Product/${match.params.product}`,
+            ""
+          )}${Length}.json`,
+          { signal: signal }
+        );
         const Product = await Res.json();
         if (!Res.ok || !Product) {
           throw new Error("Page Not Found 404");
         }
-        document.title=`${Product.title}`;
+        document.title = `${Product.title}`;
         await setProd(Product);
-        oneIndexImg.current = await Product.src.flat();
-        await setListImg(
+        setListImg(
           Product.src
-            .map((TegImg, index) =>
-              TegImg.map((val, ind) => ({
-                Tag: "img",
-                key: `${val}${0.5 + index}`,
-                src: `http://localhost:3000/${val}`,
-                alt: Product.title,
-                height: "64px",
-                width: "64px",
-                onClick: () => {
-                  setTwoIndexImg({ headIndex: index, chaptersIndex: ind });
-                  if (!!Product.color[index][ind]) {
-                    setCategColor(
-                      `${index}-${ind}-${Product.color[index][ind]}`
-                    );
-                    setCategPrice(`${index}-0-${Product.price[index][0]}`);
-                    setCategSaiz(`${index}-0-${Product.saiz[index][0]}`);
-                  } else {
-                    setCategColor(`${index}-0-${Product.color[index][0]}`);
-                    setCategPrice(`${index}-0-${Product.price[index][0]}`);
-                    setCategSaiz(`${index}-0-${Product.saiz[index][0]}`);
-                  }
-                }
-              }))
-            )
+            .map((value, index) => ({
+              Tag: "img",
+              key: `${value}${0.1 + index}`,
+              src: `/${value}`,
+              alt: Product.title,
+              height: "64px",
+              width: "64px",
+              onClick: () => {
+                setListIndx(index);
+                Product.color.length >= index &&
+                  setColorCateg(Product.color[index]);
+              }
+            }))
             .flat()
         );
       } catch (error) {
-        if(error.name !== "AbortError") {setResError(error.message);}
+        if (error.name !== "AbortError") {
+          setResError(error.message);
+        }
       }
     })();
-    return () =>{ abortController.abort();};
+    return () => {
+      abortController.abort();
+    };
   }, [match]);
   if (resError !== "") {
     return <HandlerErr error={resError} />;
-  } else if (!Object.entries(prod).length) {
+  } else if (!prod) {
     return <Loding />;
   }
 
   return (
     <Fragment>
-      <h1>{prod.title}</h1>
-      <ProdSelectArr
-        arr1={prod.color}
-        arr2={prod.price}
-        arr3={prod.saiz}
-        setValue1={setCategColor}
-        setValue2={setCategPrice}
-        setValue3={setCategSaiz}
-        setValueIndex={setTwoIndexImg}
-        value={categColor}
-        headIndex={twoIndexImg.headIndex}
-        agility={prod.agility[0]}
-        prodSecKey={0.1}
-      />
-      <ProdSelectArr
-        arr1={prod.price}
-        arr2={prod.color}
-        arr3={prod.saiz}
-        setValue1={setCategPrice}
-        setValue2={setCategColor}
-        setValue3={setCategSaiz}
-        setValueIndex={setTwoIndexImg}
-        value={categPrice}
-        headIndex={twoIndexImg.headIndex}
-        agility={prod.agility[1]}
-        prodSecKey={0.2}
-      />
-      <ProdSelectArr
-        arr3={prod.color}
-        arr2={prod.price}
-        arr1={prod.saiz}
-        setValue3={setCategColor}
-        setValue2={setCategPrice}
-        setValue1={setCategSaiz}
-        setValueIndex={setTwoIndexImg}
-        value={categSaiz}
-        headIndex={twoIndexImg.headIndex}
-        agility={prod.agility[2]}
-        prodSecKey={0.3}
-      />
+      <div itemScope itemType={"http://schema.org/Product"}>
+        <h1 itemProp={"name"}>{prod.title}</h1>
 
-      {!!listImg.length && (
-        <FlipThroList
-          arrLeng={6}
-          arrTeg={listImg}
-          IndxImg={oneIndexImg.current.indexOf(
-            prod.src[twoIndexImg.headIndex][twoIndexImg.chaptersIndex]
-          )}
+        {!!listImg.length && (
+          <FlipThroList arrLeng={6} arrTeg={listImg} IndxImg={listIndx} />
+        )}
+        <img
+          src={`/${prod.src[listIndx]}`}
+          alt={prod.title}
+          height={"500px"}
+          width={"500px"}
+          itemProp={"image"}
         />
-      )}
-      <img
-        src={`${
-          prod.src[twoIndexImg.headIndex][twoIndexImg.chaptersIndex]
-        }`}
-        alt={prod.title}
-        height={"500px"}
-        width={"500px"}
-      />
+      </div>
+      <Fragment>
+        {prod.color.length > 1 ? (
+          <select
+            value={colorCateg}
+            onChange={({ target: { value } }) => {
+              setListIndx(prod.color.indexOf(value));
+              setColorCateg(value);
+            }}
+          >
+            {prod.color.map((catVal, catInx) => (
+              <option key={`${0.2 + catInx}`}>{catVal}</option>
+            ))}
+          </select>
+        ) : (
+          <span>{prod.color}</span>
+        )}
+      </Fragment>
+      <Fragment>
+        {prod.saiz.length > 1 ? (
+          <select
+            value={saizCateg}
+            onChange={({ target: { value } }) => {
+              setSaizCateg(value);
+            }}
+          >
+            {prod.saiz.map((catVal, catInx) => (
+              <option key={`${0.2 + catInx}`}>{catVal}</option>
+            ))}
+          </select>
+        ) : (
+          <span>{prod.saiz}</span>
+        )}
+      </Fragment>
       <input size={4} type={"text"} />
+      <span>{prod.price}</span>
       <span>{prod.prodState}</span>
       <span>{prod.shipping}</span>
       <span>{prod.sold}</span>
@@ -154,4 +133,4 @@ const Product: FC<{ match: faceMatch<{ product: string }> }> = ({ match }) => {
   );
 };
 
-export default memo(Product);
+export default Product;

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const Logo = () => (
     <Fragment>
         <NavLink to={"/"}>
-        <img src={`/Logo/1.png`} alt={"Logo Amasia"} height={"119px"} width={"262px"} />
+        <img src={"/Logo/logoAmasia.svg"} alt={"Logo Amasia"} height={"90px"} width={"190px"} />
         </NavLink>
     </Fragment>
 );

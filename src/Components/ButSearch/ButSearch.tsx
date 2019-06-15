@@ -10,8 +10,8 @@ const ButSearch: FC<{ match: faceMatch<{ PageList: string }> }> = ({
 }) => {
   const [arrProd, setArrProd] = useState<faceProductList[]>([]);
   const [resError, setResError] = useState<string>("");
-  const [page, setPage] = useState({ Page: 0, ListPage: 15 });
-
+  const [page, setPage] = useState({ Page: 0, ListPage: 15,NumeSearch: "" });
+  
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
@@ -25,14 +25,16 @@ const ButSearch: FC<{ match: faceMatch<{ PageList: string }> }> = ({
         const BoolListPage = await (!Number.isNaN(
           +`${searchParams.get("ListPage")}`
         ) && !!searchParams.get("ListPage"));
+        const NumeSrchArr = match.path.split("/");
         if (!BoolPage || !BoolListPage) {
           throw new Error("Page Not Found 404");
         } else {
           setPage({
             Page: +`${searchParams.get("Page")}`,
-            ListPage: +`${searchParams.get("ListPage")}`
+            ListPage: +`${searchParams.get("ListPage")}`,
+            NumeSearch:`Categories ${NumeSrchArr[1]}  ${NumeSrchArr[2]}`
           });
-        } 
+        }  
         const Res = await fetch(
           `https://foo0022.firebaseio.com${`${match.url.replace(
             `${match.params.PageList}`,
@@ -64,6 +66,7 @@ const ButSearch: FC<{ match: faceMatch<{ PageList: string }> }> = ({
   return (
     <Fragment>
       <ConveyorProduct
+        NumeSearch={page.NumeSearch}
         arrConvProd={arrProd}
         ListPage={page.ListPage}
         Page={page.Page}
