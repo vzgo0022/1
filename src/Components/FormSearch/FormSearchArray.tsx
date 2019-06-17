@@ -3,25 +3,25 @@ import { faceTegWithText } from "./../../Type/Interface";
 export const FormSearchOption: faceTegWithText[] = [
   {
     Tag: "option",
-    key: "vgoikdnidfs",
+    key: "FormSearchOption1",
     text: "All Categories",
     value: "All"
   },
   {
     Tag: "option",
-    key: "yNwbJ4yi4g",
+    key: "FormSearchOption2",
     text: "Mens clothing",
     value: "Mens"
   },
   {
     Tag: "option",
-    key: "pe6oW5c6EB",
+    key: "FormSearchOption3",
     text: "Womens clothing",
     value: "Womens"
   },
   {
     Tag: "option",
-    key: "spZbGLrz3k",
+    key: "FormSearchOption4",
     text: "Childrens clothing",
     value: "Childrens"
   }

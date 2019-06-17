@@ -10,5 +10,5 @@ export const newProdImg = ["Mens", "Womens", "Childrens"].map((value, index) => 
   />
 ));
 
-export const newProdcateg = ["Mens", "Womens", "Childrens"];
+export const newProdCateg = ["Mens", "Womens", "Childrens"];
 

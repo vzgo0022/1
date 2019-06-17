@@ -1,11 +1,10 @@
 import React, { FC, Fragment } from "react";
 import { faceTegWithText, faceTegWithoutText } from "../../../Type/Interface";
-import UuidKey from "../../UuidKey";
 
 export const DupTegText: FC<{ array: faceTegWithText[] }> = ({ array }) => (
   <Fragment>
     {array.map(({ Tag, text, key, ...attribut }: faceTegWithText) => (
-      <Fragment key={UuidKey(`${key}+${Tag}+${text}`)}>
+      <Fragment key={`${key}+${Tag}+${text}`}>
         <Tag {...attribut}>{text}</Tag>
       </Fragment>
     ))}
@@ -15,7 +14,7 @@ export const DupTegText: FC<{ array: faceTegWithText[] }> = ({ array }) => (
 export const DupTeg: FC<{ array: faceTegWithoutText[] }> = ({ array }) => (
   <Fragment>
     {array.map(({ Tag, key, ...attribut }: faceTegWithoutText) => (
-      <Fragment key={UuidKey(`${key}+${Tag}`)}>
+      <Fragment key={`${key}+${Tag}`}>
         <Tag {...attribut} />
       </Fragment>
     ))}

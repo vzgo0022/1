@@ -6,18 +6,18 @@ import React, {
   useState,
   memo
 } from "react";
-import ListProduct from "../ListProduct"; 
-import { faceProductList } from "../../Type/Interface"; 
+import ProductList from "../ProductList"; 
+import { faceProduct } from "../../Type/Interface"; 
 import { NavLink } from "react-router-dom";
 
 const ConveyorProduct: FC<{
-  arrConvProd: faceProductList[];
+  arrConvProd: faceProduct[];
   ListPage: number;
   Page: number;
   Params: string;
   NumeSearch:string
 }> = ({ arrConvProd = [], ListPage = 15, Page = 1, Params = "",NumeSearch = "" }) => {
-  const [arrCon, setArrCon] = useState<faceProductList[][]>([]);
+  const [arrCon, setArrCon] = useState<faceProduct[][]>([]);
   const [conIndex, setConIndex] = useState<number>(0);
   const [listIndex, setListIndex] = useState<number>(0);
   const [prodLengt, setProdLengt] = useState<number>(15);
@@ -37,7 +37,7 @@ const ConveyorProduct: FC<{
         setListIndex(0);
         setConIndex(0);
       }
-      const arrList: faceProductList[][] = [];
+      const arrList: faceProduct[][] = [];
       for (let i = 0; i < arrConvProd.length; i += newLengt) {
         arrList.push(arrConvProd.slice(i, i + newLengt));
       }
@@ -67,7 +67,7 @@ const ConveyorProduct: FC<{
       <h1>{`results ${arrConvProd.length} for ${NumeSearch}`}</h1>
       {!!arrCon.length && (
         <Fragment>
-          <ListProduct arrListProd={arrCon[conIndex]} />
+          <ProductList arrListProd={arrCon[conIndex]} />
           <Fragment>
             {arrCon
               .map((value, index) => (

@@ -3,12 +3,12 @@ import React, { FC, Fragment, useEffect, useState } from "react";
 import ConveyorProduct from "../ConveyorProduct";
 import HandlerErr from "../HandlerErr";
 import Loding from "../Loding";
-import { faceProductList, faceMatch } from "../../Type/Interface";
+import { faceProduct, faceMatch } from "../../Type/Interface";
 
 const ButSearch: FC<{ match: faceMatch<{ PageList: string }> }> = ({
   match
 }) => {
-  const [arrProd, setArrProd] = useState<faceProductList[]>([]);
+  const [arrProd, setArrProd] = useState<faceProduct[]>([]);
   const [resError, setResError] = useState<string>("");
   const [page, setPage] = useState({ Page: 0, ListPage: 15,NumeSearch: "" });
   

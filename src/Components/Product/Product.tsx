@@ -4,13 +4,13 @@ import HandlerErr from "../HandlerErr";
 import Loding from "../Loding";
 import {
   faceMatch,
-  faceProductList,
+  faceProduct,
   faceTegWithoutText
 } from "../../Type/Interface";
 import FlipThroList from "../FlipThroList";
 
 const Product: FC<{ match: faceMatch<{ product: string }> }> = ({ match }) => {
-  const [prod, setProd] = useState<faceProductList>();
+  const [prod, setProd] = useState<faceProduct>();
   const [resError, setResError] = useState<string>("");
   const [listImg, setListImg] = useState<faceTegWithoutText[]>([]);
   const [listIndx, setListIndx] = useState<number>(0);
@@ -125,7 +125,11 @@ const Product: FC<{ match: faceMatch<{ product: string }> }> = ({ match }) => {
         )}
       </Fragment>
       <input size={4} type={"text"} />
-      <span>{prod.price}</span>
+      <div itemProp={"offers"} itemScope itemType={"http://schema.org/Offer"}>
+        <span itemProp="price" {...{ content: "10.00" }}>
+          {10}
+        </span>
+      </div>
       <span>{prod.prodState}</span>
       <span>{prod.shipping}</span>
       <span>{prod.sold}</span>

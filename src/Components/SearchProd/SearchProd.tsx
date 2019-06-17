@@ -2,14 +2,14 @@ import React, { FC, Fragment, useEffect, useState } from "react";
 
 import HandlerErr from "../HandlerErr";
 import Loding from "../Loding";
-import { faceProductList, faceMatch } from "../../Type/Interface";
+import { faceProduct, faceMatch } from "../../Type/Interface";
 import ConveyorProduct from "../ConveyorProduct/ConveyorProduct";
 import NotFound from "../NotFound";
 
 const SearchProd: FC<{ match: faceMatch<{ schProd: string }> }> = ({
   match
 }) => {
-  const [reqSearch, setReqSearch] = useState<faceProductList[]>([]);
+  const [reqSearch, setReqSearch] = useState<faceProduct[]>([]);
   const [nothFound, setNothFound] = useState<boolean>(false);
   const [resError, setResError] = useState<string>("");
   const [searchNam, setSearchNam] = useState<string>("");

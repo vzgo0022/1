@@ -1,10 +1,9 @@
 import React, { FC, Fragment } from "react";
-import RouteCom from "./Components/RouteCom";
-
+import RouteCompon from "./Components/RouteCompon";
 
 const App: FC = () => (
   <Fragment>
-    <RouteCom />
+    <RouteCompon />
   </Fragment>
 );
 

@@ -1,21 +1,22 @@
 import React, { FC, Fragment, useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 import HandlerErr from "../HandlerErr";
 import Loding from "../Loding";
-import { newProdImg, newProdcateg } from "./NewProdArray";
 import Banner from "../Banner";
-import { NavLink } from "react-router-dom";
-import { faceProductList, faceMatch } from "../../Type/Interface";
+import { newProdImg, newProdCateg } from "./NewProdArray";
+import useBanner from "../../Containers/useHooks/useBanner";
+import { faceProduct, faceMatch } from "../../Type/Interface";
 
 const NewProd: FC<{ match: faceMatch<{}> }> = ({ match }) => {
   const [arrProd, setArrProd] = useState<JSX.Element[]>([]);
-  const [ImgCatIndx, setImgCatIndx] = useState<number>(0);
   const [resError, setResError] = useState<string>("");
+  const { bannForth, bannBeck, bannResetValue, bannArr, bannListIndex } = useBanner(
+    newProdCateg,
+    1
+  );
 
-  useEffect(() => {
-    setImgCatIndx(0);
-  }, [match]);
-
+  useEffect(bannResetValue, [match]);
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
@@ -25,7 +26,7 @@ const NewProd: FC<{ match: faceMatch<{}> }> = ({ match }) => {
       setResError("");
       try {
         const Res = await fetch(
-          `https://foo0022.firebaseio.com/New/${newProdcateg[ImgCatIndx]}.json`,
+          `https://foo0022.firebaseio.com/New/${bannArr}.json`,
           {
             signal: signal
           }
@@ -45,7 +46,7 @@ const NewProd: FC<{ match: faceMatch<{}> }> = ({ match }) => {
               title,
               sold,
               shipping
-            }: faceProductList) => (
+            }: faceProduct) => (
               <Fragment key={id}>
                 <NavLink to={to}>
                   <img
@@ -71,7 +72,7 @@ const NewProd: FC<{ match: faceMatch<{}> }> = ({ match }) => {
     return () => {
       abortController.abort();
     };
-  }, [match,ImgCatIndx]);
+  }, [match, bannArr]);
 
   if (resError !== "") {
     return <HandlerErr error={resError} />;
@@ -81,26 +82,10 @@ const NewProd: FC<{ match: faceMatch<{}> }> = ({ match }) => {
 
   return (
     <Fragment>
-      <button
-        onClick={() => {
-          ImgCatIndx + 1 !== 3
-            ? setImgCatIndx(ImgCatIndx + 1)
-            : setImgCatIndx(0);
-        }}
-      >
-        {">"}
-      </button>
-      <button
-        onClick={() => {
-          ImgCatIndx - 1 !== 0
-            ? setImgCatIndx(ImgCatIndx - 1)
-            : setImgCatIndx(0);
-        }}
-      >
-        {"<"}
-      </button>
-      <Fragment>{newProdImg[ImgCatIndx]}</Fragment>
-      <Banner array={arrProd} yardage={8} />
+      <button onClick={bannForth}>{">"}</button>
+      <button onClick={bannBeck}>{"<"}</button>
+      <Fragment>{newProdImg[bannListIndex - 1]}</Fragment>
+      <Banner array={arrProd} yardage={1} />
     </Fragment>
   );
 };

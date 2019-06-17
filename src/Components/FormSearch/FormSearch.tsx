@@ -10,7 +10,7 @@ const FormSearch: FC<{ params: string }> = ({ params = "" }) => {
   const [search, setSearch] = useState<string>("");
   useMemo(() => {
     const searchParams = new URLSearchParams(params);
-    if (!!searchParams.get("Categories") && !!searchParams.get("Search")) {
+    if (!!searchParams.get("Categories") && !!searchParams.get("Search")) {  //
       setCategory(`${searchParams.get("Categories")}`);
       setSearch(`${searchParams.get("Search")}`);
     } else {

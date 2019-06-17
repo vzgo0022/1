@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 
-const page = "ListPage=15&Page=1";
+const page = "ListPage=15&Page=1"; 
 
 const Nav = () => {
   return (

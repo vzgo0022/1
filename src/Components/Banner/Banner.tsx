@@ -5,12 +5,12 @@ const Banner: FC<{ array: JSX.Element[]; yardage: number }> = ({
   array,
   yardage
 }) => {
-  const { arryForth, arryBeck, ListElem } = useBanner(array, yardage);
+  const { bannForth, bannBeck, bannArr } = useBanner(array, yardage);
   return (
     <Fragment>
-      <button onClick={arryForth}>{">"}</button>
-      <button onClick={arryBeck}>{"<"}</button>
-      <Fragment>{ListElem}</Fragment>
+      <button onClick={bannForth}>{">"}</button>
+      <button onClick={bannBeck}>{"<"}</button>
+      <Fragment>{bannArr}</Fragment>
     </Fragment>
   );
 };

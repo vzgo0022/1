@@ -10,31 +10,33 @@ import Admin from "../Admin";
 import Footer from "../Footer";
 import { faceMatch } from "../../Type/Interface";
 
-
-
-const renderProduct = ({
+const renderProduct = ({                        
   match
 }: {
   match: faceMatch<{ product: string }>;
 }) => (
   <Fragment>
     <Header params={""} />
+    <main>
     <Product match={match} />
+    </main>
   </Fragment>
 );
 
-const renderUntitled = ({
+const renderCategProduct  = ({
   match
 }: {
   match: faceMatch<{ PageList: string }>;
 }) => (
   <Fragment>
     <Header params={""} />
+    <main>
     <ButSearch match={match} />
+    </main>
   </Fragment>
 );
 
-const RouteCom = () => (
+const RouteCompon = () => (
   <Fragment>
     <Switch>
       <Route
@@ -43,8 +45,10 @@ const RouteCom = () => (
         render={({ match }: { match: faceMatch<{}> }) => (
           <Fragment>
             <Header params={""} />
+            <main>
             <h1>{"Welcome to Amasia"}</h1>
             <NewProd match={match} />
+            </main>
             <footer><Footer/></footer>
           </Fragment>
         )}
@@ -54,7 +58,9 @@ const RouteCom = () => (
         render={({ match }: { match: faceMatch<{ schProd: string }> }) => (
           <Fragment>
             <Header params={match.params.schProd} />
+            <main>
             <SearchProd match={match} />
+            </main>
           </Fragment>
         )}
       />
@@ -67,13 +73,13 @@ const RouteCom = () => (
 
       <Route path="/Womens/Hat/Product/:product" render={renderProduct} />
 
-      <Route path="/Mens/Hat/:PageList" render={renderUntitled} />
-      <Route path="/Mens/Jacket/:PageList" render={renderUntitled} />
-      <Route path="/Mens/Pant/:PageList" render={renderUntitled} />
-      <Route path="/Mens/Shoe/:PageList" render={renderUntitled} />
-      <Route path="/Mens/Suit/:PageList" render={renderUntitled} />
-      <Route path="/Mens/Shirt/:PageList" render={renderUntitled} />
-      <Route path="/Womens/Hat/:PageList" render={renderUntitled} />
+      <Route path="/Mens/Hat/:PageList" render={renderCategProduct} />
+      <Route path="/Mens/Jacket/:PageList" render={renderCategProduct} />
+      <Route path="/Mens/Pant/:PageList" render={renderCategProduct} />
+      <Route path="/Mens/Shoe/:PageList" render={renderCategProduct} />
+      <Route path="/Mens/Suit/:PageList" render={renderCategProduct} />
+      <Route path="/Mens/Shirt/:PageList" render={renderCategProduct} />
+      <Route path="/Womens/Hat/:PageList" render={renderCategProduct} />
 
       <Route path="/Admin" component={Admin} />
       <Route path="*" render={() => <Redirect to="/" />} />
@@ -81,4 +87,4 @@ const RouteCom = () => (
   </Fragment>
 );
 
-export default RouteCom;
+export default RouteCompon;

@@ -6,10 +6,12 @@ import ButtLogSing from "../ButtLogSing/ButtLogSing";
 
 const Header = ({params=""}) => (
    <Fragment>
+       <header>
        <Logo/>
        <Nav/>
        <FormSearch params={params}/>
        <ButtLogSing/>
+       </header>
    </Fragment>
 );
 

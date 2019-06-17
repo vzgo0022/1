@@ -38,9 +38,6 @@ export interface faceProduct {
   readonly color: string[];
   readonly saiz: string[];
   readonly price: string;
-}
-
-export interface faceProductList extends faceProduct {
   readonly id: string;
   readonly to: string;
 }
