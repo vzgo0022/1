@@ -1,9 +1,9 @@
 import React, { FC, Fragment } from "react";
-import RouteCompon from "./Components/RouteCompon";
+import RouteProj from "./Components/RouteProj";
 
 const App: FC = () => (
   <Fragment>
-    <RouteCompon />
+    <RouteProj/>
   </Fragment>
 );
 

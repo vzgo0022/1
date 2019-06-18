@@ -7,22 +7,25 @@ const ProdListItem: FC<faceProduct> = ({
   prodState = "",
   shipping = "",
   sold = "",
-  src = "", //kartinka ni nadna //////
+  alt = "",
+  src = [],
   price = ""
 }) => (
   <Fragment>
-    <h2 itemProp="name">{title}</h2>
-    <br />
-    <img src={`/${src[0]}`} alt={title} height={"220px"} width={"220px"} />
-    <br />
-    <span>{price}</span>
-    <br />
-    <span>{prodState}</span>
-    <br />
-    <span>{shipping}</span>
-    <br />
-    <span>{sold}</span>
-    <br />
+    {!!title && <h2 itemProp="name">{title}</h2>}
+    {!!src.length && (
+      <img
+        src={`/${src[0]}`}
+        alt={alt ? alt : "name not defined"}
+        height={"220px"}
+        width={"220px"}
+      />
+    )}
+
+    {!!price && <span>{price}</span>}
+    {!!prodState && <span>{prodState}</span>}
+    {!!shipping && <span>{shipping}</span>}
+    {!!sold && <span>{sold}</span>}
   </Fragment>
 );
 

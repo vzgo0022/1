@@ -6,8 +6,8 @@ import React, {
   useState,
   memo
 } from "react";
-import ProductList from "../ProductList"; 
-import { faceProduct } from "../../Type/Interface"; 
+import ProductList from "../ProductList";
+import { faceProduct } from "../../Type/Interface";
 import { NavLink } from "react-router-dom";
 
 const ConveyorProduct: FC<{
@@ -15,8 +15,14 @@ const ConveyorProduct: FC<{
   ListPage: number;
   Page: number;
   Params: string;
-  NumeSearch:string
-}> = ({ arrConvProd = [], ListPage = 15, Page = 1, Params = "",NumeSearch = "" }) => {
+  NameSearch: string;
+}> = ({
+  arrConvProd = [],
+  ListPage = 15,
+  Page = 1,
+  Params = "",
+  NameSearch = ""
+}) => {
   const [arrCon, setArrCon] = useState<faceProduct[][]>([]);
   const [conIndex, setConIndex] = useState<number>(0);
   const [listIndex, setListIndex] = useState<number>(0);
@@ -64,15 +70,16 @@ const ConveyorProduct: FC<{
 
   return (
     <Fragment>
-      <h1>{`results ${arrConvProd.length} for ${NumeSearch}`}</h1>
+      <h1>{`results ${arrConvProd.length} for ${NameSearch}`}</h1>
       {!!arrCon.length && (
         <Fragment>
           <ProductList arrListProd={arrCon[conIndex]} />
           <Fragment>
             {arrCon
               .map((value, index) => (
-                <NavLink to={`${Params}ListPage=${prodLengt}&Page=${index + 1}`}
-                  onClick={(e) => {
+                <NavLink
+                  to={`${Params}ListPage=${prodLengt}&Page=${index + 1}`}
+                  onClick={e => {
                     ListBooClick(index);
                     e.stopPropagation();
                   }}

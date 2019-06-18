@@ -13,7 +13,7 @@ const SearchProd: FC<{ match: faceMatch<{ schProd: string }> }> = ({
   const [nothFound, setNothFound] = useState<boolean>(false);
   const [resError, setResError] = useState<string>("");
   const [searchNam, setSearchNam] = useState<string>("");
-  const [page, setPage] = useState({ Page: 0, ListPage: 15, Params:"",NumeSearch: "" });
+  const [page, setPage] = useState({ Page: 0, ListPage: 15, Params:"",NameSearch: "" });
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -43,7 +43,7 @@ const SearchProd: FC<{ match: faceMatch<{ schProd: string }> }> = ({
             Page: +`${searchParams.get("Page")}`,
             ListPage: +`${searchParams.get("ListPage")}`,
             Params:`/sch/${match.params.schProd.split("&", 2).map(e => e + "&").join("")}`,
-            NumeSearch:`Search ${searchParams.get("Search")}`
+            NameSearch:`Search ${searchParams.get("Search")}`
           });
         }
         const Categories =
@@ -95,7 +95,7 @@ const SearchProd: FC<{ match: faceMatch<{ schProd: string }> }> = ({
         ListPage={page.ListPage}
         Page={page.Page}
         Params={page.Params}
-        NumeSearch={page.NumeSearch}
+        NameSearch={page.NameSearch}
       />
     </Fragment>
   );

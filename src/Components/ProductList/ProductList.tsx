@@ -4,10 +4,10 @@ import { NavLink } from "react-router-dom";
 import ProdListItem from "../ProdListItem";
 import { faceProduct } from "../../Type/Interface";
 
-const ProductList: FC<{ arrListProd: faceProduct[]}> = ({
+const ProductList: FC<{ arrListProd: faceProduct[] | faceProduct}> = ({
   arrListProd
 }) =>  (
-    <Fragment>
+  Array.isArray(arrListProd)?(<Fragment>
       {arrListProd.map((ProdInfo : faceProduct) => (
         <Fragment key={ProdInfo.id}>
           <NavLink to={`${ProdInfo.to}`}>
@@ -16,6 +16,12 @@ const ProductList: FC<{ arrListProd: faceProduct[]}> = ({
         </Fragment>
       ))}
     </Fragment>
-  );
+  ):(
+    <Fragment key={arrListProd.id}>
+          <NavLink to={`${arrListProd.to}`}>
+            <ProdListItem {...arrListProd} />
+          </NavLink>
+        </Fragment>
+  ));
 
 export default memo(ProductList);

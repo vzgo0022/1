@@ -1,5 +1,4 @@
 import React, { FC, Fragment, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 
 import HandlerErr from "../HandlerErr";
 import Loding from "../Loding";
@@ -7,14 +6,18 @@ import Banner from "../Banner";
 import { newProdImg, newProdCateg } from "./NewProdArray";
 import useBanner from "../../Containers/useHooks/useBanner";
 import { faceProduct, faceMatch } from "../../Type/Interface";
+import ProductList from "../ProductList";
 
 const NewProd: FC<{ match: faceMatch<{}> }> = ({ match }) => {
   const [arrProd, setArrProd] = useState<JSX.Element[]>([]);
   const [resError, setResError] = useState<string>("");
-  const { bannForth, bannBeck, bannResetValue, bannArr, bannListIndex } = useBanner(
-    newProdCateg,
-    1
-  );
+  const {
+    bannForth,
+    bannBeck,
+    bannResetValue,
+    bannArr,
+    bannListIndex
+  } = useBanner(newProdCateg, 1);
 
   useEffect(bannResetValue, [match]);
   useEffect(() => {
@@ -37,31 +40,11 @@ const NewProd: FC<{ match: faceMatch<{}> }> = ({ match }) => {
         const ResObj = await Res.json();
         const ResArr = await Object.values(ResObj).flat();
         await setArrProd(
-          ResArr.map(
-            ({
-              to,
-              id,
-              price,
-              src,
-              title,
-              sold,
-              shipping
-            }: faceProduct) => (
-              <Fragment key={id}>
-                <NavLink to={to}>
-                  <img
-                    src={`/${src[0]}`}
-                    alt={title}
-                    height={"220px"}
-                    width={"220px"}
-                  />
-                  <span>{price}</span>
-                  <span>{shipping}</span>
-                  <span>{sold}</span>
-                </NavLink>
-              </Fragment>
-            )
-          )
+          ResArr.map((ProdArr: faceProduct, ProdIndex) => (
+            <Fragment key={`${ProdIndex / 10 + ProdIndex}`}>
+              <ProductList arrListProd={ProdArr} />
+            </Fragment>
+          ))
         );
       } catch (error) {
         if (error.name !== "AbortError") {
@@ -85,7 +68,7 @@ const NewProd: FC<{ match: faceMatch<{}> }> = ({ match }) => {
       <button onClick={bannForth}>{">"}</button>
       <button onClick={bannBeck}>{"<"}</button>
       <Fragment>{newProdImg[bannListIndex - 1]}</Fragment>
-      <Banner array={arrProd} yardage={1} />
+      <Banner array={arrProd} yardage={8} />
     </Fragment>
   );
 };
