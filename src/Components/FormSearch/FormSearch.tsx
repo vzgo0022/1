@@ -1,23 +1,27 @@
 import React, { FC, useState, useMemo } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, RouteComponentProps, withRouter } from "react-router-dom";
 
 import { DupTegText } from "../../Containers/DupComp/DupTeg/DupTeg";
 import { FormSearchOption } from "./FormSearchArray";
 import { FormSearchInput } from "./FormSearchObject";
 
-const FormSearch: FC<{ params: string }> = ({ params = "" }) => {
+const FormSearch: FC<RouteComponentProps<{ schProd: string }>> = ({
+  match: {
+    params: { schProd }
+  }
+}) => {
   const [category, setCategory] = useState<string>("All");
   const [search, setSearch] = useState<string>("");
   useMemo(() => {
-    const searchParams = new URLSearchParams(params);
-    if (!!searchParams.get("Categories") && !!searchParams.get("Search")) {  
+    const searchParams = new URLSearchParams(schProd);
+    if (!!searchParams.get("Categories") && !!searchParams.get("Search")) {
       setCategory(`${searchParams.get("Categories")}`);
       setSearch(`${searchParams.get("Search")}`);
     } else {
       setSearch("");
       setCategory("All");
     }
-  }, [params]);
+  }, [schProd]);
 
   return (
     <form>
@@ -47,4 +51,4 @@ const FormSearch: FC<{ params: string }> = ({ params = "" }) => {
   );
 };
 
-export default FormSearch;
+export default withRouter(FormSearch);

@@ -16,5 +16,25 @@ export const MensArrPathPageList = [
   "Shirt"
 ].map(Path => `/Mens/${Path}/:PageList`);
 
+
+export const WomensArrPathProduct = [
+  "Hat",
+  "Jacket",
+  "Pant",
+  "Shoe",
+  "Suit",
+  "Shirt"
+].map(Path => `/Womens/${Path}/Product/:product`);
+
+export const WomensArrPathPageList = [
+  "Hat",
+  "Jacket",
+  "Pant",
+  "Shoe",
+  "Suit",
+  "Shirt"
+].map(Path => `/Womens/${Path}/:PageList`);
+
+
 /*export const WomensPathArray =["Hat","Jacket","Pant","Shoe","Suit","Shirt"].map((Path)=>`/Womens/${Path}/Product/:product`);
 export const ChildrensPathArray =["Hat","Jacket","Pant","Shoe","Suit","Shirt"].map((Path)=>`/Childrens/${Path}/Product/:product`);*/

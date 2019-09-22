@@ -3,8 +3,7 @@ import React, {
   Fragment,
   useEffect,
   useCallback,
-  useState,
-  memo
+  useState
 } from "react";
 import ProductList from "../ProductList";
 import { faceProduct } from "../../Type/Interface";
@@ -107,4 +106,4 @@ const ConveyorProduct: FC<{
   );
 };
 
-export default memo(ConveyorProduct);
+export default ConveyorProduct;

@@ -1,14 +1,13 @@
 import React, { FC, Fragment, useEffect, useState } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import HandlerErr from "../HandlerErr";
 import Loding from "../Loding";
-import { faceProduct, faceMatch } from "../../Type/Interface";
+import { faceProduct } from "../../Type/Interface";
 import ConveyorProduct from "../ConveyorProduct/ConveyorProduct";
 import NotFound from "../NotFound";
 
-const SearchProd: FC<{ match: faceMatch<{ schProd: string }> }> = ({
-  match
-}) => {
+const SearchProd: FC<RouteComponentProps<{ schProd: string }>> = ({ match }) => {
   const [reqSearch, setReqSearch] = useState<faceProduct[]>([]);
   const [nothFound, setNothFound] = useState<boolean>(false);
   const [resError, setResError] = useState<string>("");
@@ -101,4 +100,4 @@ const SearchProd: FC<{ match: faceMatch<{ schProd: string }> }> = ({
   );
 };
 
-export default SearchProd;
+export default withRouter(SearchProd);

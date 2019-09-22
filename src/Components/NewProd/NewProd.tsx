@@ -1,14 +1,15 @@
 import React, { FC, Fragment, useEffect, useState } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import HandlerErr from "../HandlerErr";
 import Loding from "../Loding";
 import Banner from "../Banner";
 import { newProdImg, newProdCateg } from "./NewProdArray";
 import useBanner from "../../Containers/useHooks/useBanner";
-import { faceProduct, faceMatch } from "../../Type/Interface";
+import { faceProduct } from "../../Type/Interface";
 import ProductList from "../ProductList";
 
-const NewProd: FC<{ match: faceMatch<{}> }> = ({ match }) => {
+const NewProd: FC<RouteComponentProps<{}>> = ({ match }) => {
   const [arrProd, setArrProd] = useState<JSX.Element[]>([]);
   const [resError, setResError] = useState<string>("");
   const {
@@ -29,7 +30,7 @@ const NewProd: FC<{ match: faceMatch<{}> }> = ({ match }) => {
       setResError("");
       try {
         const Res = await fetch(
-          `https://foo0022.firebaseio.com/New/${bannArr}.json`,
+          `https://doo0022.firebaseio.com/New/${bannArr}.json`,
           {
             signal: signal
           }
@@ -73,4 +74,4 @@ const NewProd: FC<{ match: faceMatch<{}> }> = ({ match }) => {
   );
 };
 
-export default NewProd;
+export default withRouter(NewProd);

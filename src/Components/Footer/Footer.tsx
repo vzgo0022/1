@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const Footer = () => (
     <Fragment>
-      <NavLink to={"/Admin"}>Admin Information</NavLink>
+      <NavLink to={"/Admin"}>{"Admin Information"}</NavLink>
     </Fragment>
 );
 

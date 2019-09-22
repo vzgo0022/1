@@ -5,53 +5,42 @@ import SearchProd from "../SearchProd";
 import NewProd from "../NewProd";
 import Header from "../Header";
 import Footer from "../Footer";
-import { faceMatch } from "../../Type/Interface";
-//<{ product: string }>
-export const RouteProduct = ({
-  match 
-}:{match: faceMatch<{ product: string }>}) => (
+
+export const RouteProduct = () => (
   <Fragment>
-    <Header params={""} />
+    <Header />
     <main>
-      <Product match={match} />
+      <Product/>
     </main>
   </Fragment>
 );
 
-export const RouteCategProduct = ({
-  match
-}: {
-  match: faceMatch<{ PageList: string }>;
-}) => (
+export const RouteCategProduct = () => (
   <Fragment>
-    <Header params={""} />
+    <Header />
     <main>
-      <ButSearch/>
+      <ButSearch />
     </main>
   </Fragment>
 );
-//////////////
-export const RouteHead = ({ match }: { match: faceMatch<{}> }) => (
+
+export const RouteHead = () => (
   <Fragment>
-    <Header params={""} />
+    <Header />
     <main>
       <h1>{"Welcome to Amasia"}</h1>
-      <NewProd match={match} />
+      <NewProd />
     </main>
     <footer>
       <Footer />
     </footer>
   </Fragment>
 );
-export const RouteSchProd = ({
-  match
-}: {
-  match: faceMatch<{ schProd: string }>;
-}) => (
+export const RouteSchProd = () => (
   <Fragment>
-    <Header params={match.params.schProd} />
+    <Header />
     <main>
-      <SearchProd match={match} />
+      <SearchProd />
     </main>
   </Fragment>
 );

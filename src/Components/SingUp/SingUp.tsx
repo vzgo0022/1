@@ -1,30 +1,23 @@
-import React from 'react';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 const SingUp = () => (
-    <div className="App">
+  <div>
     <div>
-      <p className="text">Sign Up for Free</p>
+      <p>Sign Up for Free</p>
     </div>
     <div>
       <form id="form">
-        <input type="text" placeholder="First Name*" className="Framework" />
-        <input type="text" placeholder="Last Name*" className="Framework" />
-        <br />
+        <input type="text" placeholder="First Name*" />
+        <input type="text" placeholder="Last Name*" />
         <input
           type="email"
           placeholder="Email Address*"
-          className="Framework ff"
         />
-        <br />
-        <input
-          type="password"
-          placeholder="Set A Password*"
-          className="Framework ff"
-        />
-        <br />
-        <button form="form" className="button Framework">
-          <span className="text">GET STARTED</span>
-        </button>
+        <input type="password" placeholder="Set A Password*" />
+        <NavLink to={"/"}>
+          <span>GET STARTED</span>
+        </NavLink>
       </form>
     </div>
   </div>

@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 
 const Admin = () => {
   const icon = ["facebook", "linkedin", "stackoverflow", "github"]
- const icnUrl =["1","2","3","4"].map((val,indx) => (
-     <Link to={`${val}`}> 
+ const icnUrl =icon.map((val,indx) => (
+   <ul>
+     <Link to={`${indx}`}> 
     <li>
-      <img src={`/admin/${icon[indx]}.svg`} alt={val} height={"40px"} width={"40px"} />
+      <img src={`/admin/${val}.svg`} alt={val} height={"40px"} width={"40px"} />
     </li>
     </Link>
+    </ul>
   ));
   return (
     <Fragment>

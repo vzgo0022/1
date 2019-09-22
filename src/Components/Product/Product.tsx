@@ -1,15 +1,12 @@
 import React, { FC, Fragment, useState, useEffect } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import HandlerErr from "../HandlerErr";
 import Loding from "../Loding";
-import {
-  faceMatch,
-  faceProduct,
-  faceTegWithoutText
-} from "../../Type/Interface";
+import { faceProduct, faceTegWithoutText } from "../../Type/Interface";
 import FlipThroList from "../FlipThroList";
 
-const Product: FC<{ match: faceMatch<{ product: string }> }> = ({ match }) => {
+const Product: FC<RouteComponentProps<{ product: string }>> = ({ match }) => {
   const [prod, setProd] = useState<faceProduct>();
   const [resError, setResError] = useState<string>("");
   const [listImg, setListImg] = useState<faceTegWithoutText[]>([]);
@@ -23,12 +20,12 @@ const Product: FC<{ match: faceMatch<{ product: string }> }> = ({ match }) => {
     (async () => {
       setResError("");
       setProd(undefined);
+      const searchParams = new URLSearchParams(match.params.product);
+      if (Number.isNaN(+`${searchParams.get("Length")}`)) {
+        setResError("Page Not Found 404");
+      }
+      const Length = `${searchParams.get("Length")}`;
       try {
-        const searchParams = await new URLSearchParams(match.params.product);
-        if (Number.isNaN(+`${searchParams.get("Length")}`)) {
-          throw new Error("Page Not Found 404");
-        }
-        const Length = await `${searchParams.get("Length")}`;
         const Res = await fetch(
           `https://foo0022.firebaseio.com//${match.url.replace(
             `Product/${match.params.product}`,
@@ -117,7 +114,7 @@ const Product: FC<{ match: faceMatch<{ product: string }> }> = ({ match }) => {
             }}
           >
             {prod.saiz.map((catVal, catInx) => (
-              <option key={`${0.2 + catInx}`}>{catVal}</option>
+              <option key={`${0.3 + catInx}`}>{catVal}</option>
             ))}
           </select>
         ) : (
@@ -126,9 +123,10 @@ const Product: FC<{ match: faceMatch<{ product: string }> }> = ({ match }) => {
       </Fragment>
       <input size={4} type={"text"} />
       <div itemProp={"offers"} itemScope itemType={"http://schema.org/Offer"}>
-        <span itemProp="price" {...{ content: "10.00" }}>
-          {10}
+        <span itemProp={"price"} {...{ content: `${prod.price}` }}>
+          {prod.price}
         </span>
+        <meta itemProp="priceCurrency" content="USD" />
       </div>
       <span>{prod.prodState}</span>
       <span>{prod.shipping}</span>
@@ -137,4 +135,4 @@ const Product: FC<{ match: faceMatch<{ product: string }> }> = ({ match }) => {
   );
 };
 
-export default Product;
+export default withRouter(Product);

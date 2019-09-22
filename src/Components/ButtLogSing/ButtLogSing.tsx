@@ -1,18 +1,17 @@
-import React,{Fragment,useState} from 'react';
+import React,{Fragment} from 'react';
+import { NavLink } from 'react-router-dom';
 import LogIn from '../LogIn';
-import SingUp from '../SingUp';
 
 const ButtLogSing = () => {
-    const [boolLogSing, setBoolLogSing] = useState<boolean>(true);
     return (
         <Fragment>
-           <button className="SignUp" onClick={()=>setBoolLogSing(true)}>
+          <LogIn/>
+           <NavLink to={"/SingUp"}>
             {"Sign Up"}
-          </button>
-          <button className="LogIn" onClick={()=>setBoolLogSing(false)}>
+          </NavLink>
+          <NavLink to={"/"}>
             {"Log In"}
-          </button>
-          {boolLogSing ? <LogIn />:<SingUp />}
+          </NavLink>
         </Fragment>
     );
 }
